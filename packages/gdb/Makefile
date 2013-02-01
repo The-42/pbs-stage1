@@ -12,6 +12,7 @@ include packages/common.mk
 conf-args = \
 	--target=$(host) \
 	--prefix=$(prefix) \
+	--libdir=$(prefix)/lib \
 	--infodir=$(exec-prefix)/share/info \
 	--mandir=$(exec-prefix)/share/man \
 	--program-prefix=$(host)- \
