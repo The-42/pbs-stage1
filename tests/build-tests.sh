@@ -2,6 +2,9 @@
 
 targets="alpha-linux-gnu"
 targets="$targets arm-unknown-linux-gnueabi"
+targets="$targets arm-unknown-linux-uclibceabi"
+targets="$targets armv7l-unknown-linux-gnueabihf"
+targets="$targets armv7l-unknown-linux-uclibceabihf"
 targets="$targets i786-pc-linux-gnu"
 targets="$targets ia64-linux-gnu"
 targets="$targets m68k-linux-gnu"
