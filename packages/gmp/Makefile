@@ -2,7 +2,7 @@ package = gmp
 version = 5.1.1
 
 location = http://ftp.gnu.org/gnu/$(package)
-tarballs = $(package)-$(version)a.tar.xz
+tarballs = $(package)-$(version).tar.xz
 
 pkgsrcdir = $(builddir)/$(package)-$(version)
 pkgbuilddir = $(pkgsrcdir)
