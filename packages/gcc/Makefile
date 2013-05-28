@@ -6,10 +6,16 @@ tarballs = $(package)-$(version).tar.bz2
 
 pkgsrcdir = $(builddir)/$(package)-$(version)
 pkgbuilddir = $(pkgsrcdir)/target-$(target)
+srcdir = $(CURDIR)/packages/$(package)
 
 include packages/common.mk
 
-$(pkgbuilddir)/stage1: | $(pkgsrcdir)
+$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
+	cd $(pkgsrcdir) && QUILT_PATCHES=$(srcdir)/patches \
+		quilt --quiltrc /dev/null push -a || test $$? = 2
+	touch $@
+
+$(pkgbuilddir)/stage1: $(pkgsrcdir)/stamp-patched | $(pkgsrcdir)
 	mkdir -p $@
 
 stage1-conf-args = \
