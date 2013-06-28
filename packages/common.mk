@@ -6,7 +6,7 @@ $(downloaddir) $(builddir):
 	mkdir -p $@
 
 $(download-files): $(downloaddir)/%: | $(downloaddir)
-	curl --output $@ $(location)/$*
+	wget --no-check-certificate -q -O $@ $(location)/$*
 
 download-files := $(patsubst $(downloaddir)/%,%,$(download-files))
 extract-files = $(addprefix $(stampdir)/extract-,$(download-files))
