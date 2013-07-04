@@ -18,6 +18,7 @@ conf-args = \
 	--libdir=$(exec-prefix)/lib \
 	--with-pkgversion="PBS $(release)" \
 	--with-sysroot=$(sysroot) \
+	--disable-multilib \
 	--disable-nls
 
 $(pkgbuilddir): | $(pkgsrcdir)

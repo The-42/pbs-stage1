@@ -46,6 +46,8 @@ ifeq ($(os),none)
   ifeq ($(arch),arm)
     stage1-conf-args += --enable-interwork
   endif
+else
+  stage1-conf-args += --disable-multilib
 endif
 
 install-stage1: | $(pkgbuilddir)/stage1
@@ -98,6 +100,8 @@ ifeq ($(os),none)
   ifeq ($(arch),arm)
     stage2-conf-args += --enable-interwork
   endif
+else
+  stage2-conf-args += --disable-multilib
 endif
 
 install: | $(pkgbuilddir)/stage2
