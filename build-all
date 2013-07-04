@@ -1,0 +1,31 @@
+#!/bin/sh
+
+PREFIX=toolchains
+
+if ! test -z $1; then
+	PREFIX=$1
+fi
+
+if ! test -d build; then
+	echo "Creating build directory..."
+	mkdir -p build
+fi
+
+if ! test -d $PREFIX; then
+	echo "Creating target directory..."
+	mkdir -p $PREFIX
+	if ! test -d $PREFIX; then
+		echo "Failed to create directory $PREFIX."
+		exit 1
+	fi
+fi
+
+echo "Using target dir $PREFIX"
+FILES=./targets/*
+
+for f in $FILES
+do
+	target=`basename "$f" .mk`
+	echo "Processing target $target..."
+	ionice nice make prefix=$PREFIX TARGET=$target
+done
