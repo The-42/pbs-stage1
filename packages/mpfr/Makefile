@@ -13,7 +13,9 @@ conf-args = \
 	--prefix=$(prefix) \
 	--infodir=$(prefix)/share/info \
 	--mandir=$(prefix)/share/man \
-	--with-gmp=$(prefix)
+	--with-gmp=$(prefix) \
+	--enable-shared \
+	--disable-static
 
 install: | $(pkgbuilddir)
 	cd $(pkgbuilddir) && ./configure $(conf-args)

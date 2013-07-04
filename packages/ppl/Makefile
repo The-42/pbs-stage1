@@ -15,7 +15,10 @@ conf-args = \
 	--infodir=$(prefix)/share/info \
 	--mandir=$(prefix)/share/man \
 	--with-gmp=$(prefix) \
-	--enable-interfaces="c,cxx"
+	--enable-interfaces="c,cxx" \
+	--enable-shared \
+	--disable-static \
+	--disable-optimization
 
 $(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
 	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/gmp-5.1.0.patch
