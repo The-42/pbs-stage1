@@ -29,3 +29,11 @@ choose a different install directory you can override the "prefix" variable,
 for example to point to /opt or /usr/local.
 
 	$ make prefix=/usr/local TARGET=arm-unknown-linux-gnueabi
+
+
+Requirements
+============
+
+- make
+- gcc, g++
+- texinfo
