@@ -18,6 +18,7 @@ $(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: | $(pkgbuilddir)
 
 install-vars = \
 	install_root=$(sysroot) \
+	DESTDIR=$(sysroot) \
 	prefix=/usr
 
 stage1-conf-args = \
