@@ -3,7 +3,7 @@
 PREFIX=toolchains
 
 if ! test -z $1; then
-	PREFIX=$1
+	PREFIX=`readlink -m $1`
 fi
 
 if ! test -d build; then
