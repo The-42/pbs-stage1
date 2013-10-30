@@ -34,6 +34,8 @@ for example to point to /opt or /usr/local.
 Requirements
 ============
 
-- make
+- make, autoconf, m4
 - gcc, g++
+- patch, quilt
 - texinfo
+- wget, tar
