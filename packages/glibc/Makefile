@@ -10,7 +10,12 @@ srcdir = $(CURDIR)/packages/$(package)
 
 include packages/common.mk
 
-$(pkgbuilddir): | $(pkgsrcdir)
+$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
+	cd $(pkgsrcdir) && QUILT_PATCHES=$(srcdir)/patches \
+		quilt --quiltrc /dev/null push -a || test $$? = 2
+	touch $@
+
+$(pkgbuilddir): $(pkgsrcdir)/stamp-patched | $(pkgsrcdir)
 	mkdir -p $@
 
 $(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: | $(pkgbuilddir)
