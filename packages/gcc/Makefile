@@ -42,7 +42,7 @@ ifeq ($(arch),arm)
   ifeq ($(fp),hard)
     stage1-conf-args += --with-float=hard
   else
-    stage1-conf-args += --with-float=softfp
+    stage1-conf-args += --with-float=soft
   endif
 endif
 
@@ -96,7 +96,7 @@ ifeq ($(arch),arm)
   ifeq ($(fp),hard)
     stage2-conf-args += --with-float=hard
   else
-    stage2-conf-args += --with-float=softfp
+    stage2-conf-args += --with-float=soft
   endif
 endif
 
