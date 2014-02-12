@@ -26,8 +26,8 @@ $(pkgbuilddir): | $(pkgsrcdir)
 	mkdir -p $@
 
 install: | $(pkgbuilddir)
-	cd $(pkgbuilddir) && ../configure $(conf-args)
-	cd $(pkgbuilddir) && $(MAKE) -j $(num-jobs)
-	cd $(pkgbuilddir) && $(MAKE) install
+	cd $(pkgbuilddir) && $(env) ../configure $(conf-args) $(conf-vars)
+	cd $(pkgbuilddir) && $(env) $(MAKE) -j $(num-jobs)
+	cd $(pkgbuilddir) && $(env) $(MAKE) install
 
 .PHONY: install
