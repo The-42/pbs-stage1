@@ -9,6 +9,9 @@ pkgbuilddir = $(pkgsrcdir)/target-$(target)
 
 include packages/common.mk
 
+conf-vars = \
+	ac_cv_prog_MAKEINFO=no
+
 conf-args = \
 	--target=$(host) \
 	--prefix=$(prefix) \
