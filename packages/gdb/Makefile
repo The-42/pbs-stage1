@@ -6,11 +6,9 @@ tarballs = $(package)-$(version).tar.bz2
 
 pkgsrcdir = $(builddir)/$(package)-$(version)
 pkgbuilddir = $(pkgsrcdir)/target-$(target)
+srcdir = $(CURDIR)/packages/$(package)
 
 include packages/common.mk
-
-conf-vars = \
-	ac_cv_prog_MAKEINFO=no
 
 conf-args = \
 	--target=$(host) \
@@ -28,7 +26,11 @@ endif
 $(pkgbuilddir): | $(pkgsrcdir)
 	mkdir -p $@
 
-install: | $(pkgbuilddir)
+$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
+	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/disable-docs.patch
+	touch $@
+
+install: $(pkgsrcdir)/stamp-patched | $(pkgbuilddir)
 	cd $(pkgbuilddir) && $(env) ../configure $(conf-args) $(conf-vars)
 	cd $(pkgbuilddir) && $(env) $(MAKE) -j $(num-jobs)
 	cd $(pkgbuilddir) && $(env) $(MAKE) install

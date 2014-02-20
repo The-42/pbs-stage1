@@ -1,0 +1,25 @@
+From 53f8eeda418f0c0eed6f1cd407798d70b46ce8af Mon Sep 17 00:00:00 2001
+From: Alban Bedel <alban.bedel@avionic-design.de>
+Date: Thu, 20 Feb 2014 18:15:43 +0100
+Subject: [PATCH] Disable the documentation generation
+
+---
+ gdb/Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gdb/Makefile.in b/gdb/Makefile.in
+index d2bbbd5..c65a650 100644
+--- a/gdb/Makefile.in
++++ b/gdb/Makefile.in
+@@ -967,7 +967,7 @@ COMMON_OBS = $(DEPFILES) $(CONFIG_OBS) $(YYOBJ) \
+ 
+ TSOBS = inflow.o
+ 
+-SUBDIRS = doc @subdirs@ data-directory $(GNULIB_BUILDDIR)
++SUBDIRS = @subdirs@ data-directory $(GNULIB_BUILDDIR)
+ CLEANDIRS = $(SUBDIRS)
+ 
+ # List of subdirectories in the build tree that must exist.
+-- 
+1.9.0
+
