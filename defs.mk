@@ -9,7 +9,7 @@ exec-prefix = $(prefix)/$(target)
 sysroot = $(prefix)/$(target)/sys-root
 sysroot-prefix = $(sysroot)/usr
 
-num-jobs = 8
+num-jobs = $(or $(shell cat /proc/cpuinfo | grep '^processor' | wc -l),1)
 
 build = $(shell support/config.guess)
 host = $(target)
