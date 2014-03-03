@@ -118,6 +118,12 @@ $(prefix)/meta/automake:
 
 automake: $(prefix)/meta/automake
 
-targets = gcc gdb libtool pkgconfig ccache autoconf automake
+$(prefix)/meta/ncurses:
+	$(MAKE) -f packages/ncurses/Makefile install
+	touch $@
+
+ncurses: $(prefix)/meta/ncurses
+
+targets = gcc gdb libtool pkgconfig ccache autoconf automake ncurses
 
 all: $(targets)
