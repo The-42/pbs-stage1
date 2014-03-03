@@ -82,7 +82,7 @@ $(prefix)/meta/$(target)-gcc: $(prefix)/meta/$(target)-$(libc)
 
 gcc: $(prefix)/meta/$(target)-gcc
 
-$(prefix)/meta/$(target)-gdb:
+$(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
 	$(MAKE) -f packages/gdb/Makefile install
 	touch $@
 
