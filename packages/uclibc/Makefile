@@ -29,6 +29,7 @@ common-vars = \
 $(pkgsrcdir)/.patch: | $(pkgsrcdir)
 	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/config-path-len.patch
 	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/out-of-tree.patch
+	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/arg-max.patch
 	touch $@
 
 $(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: $(pkgsrcdir)/.patch
