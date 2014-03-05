@@ -57,10 +57,6 @@ $(prefix)/meta/$(target)-uclibc-stage1: $(prefix)/meta/$(target)-gcc-stage1
 	$(MAKE) -f packages/uclibc/Makefile install-stage1
 	touch $@
 
-$(prefix)/meta/$(target)-newlib-stage1: $(prefix)/meta/$(target)-gcc-stage1
-	$(MAKE) -f packages/newlib/Makefile install-stage1
-	touch $@
-
 $(prefix)/meta/$(target)-gcc-stage1-libgcc: $(prefix)/meta/$(target)-$(libc)-stage1
 	$(MAKE) -f packages/gcc/Makefile install-stage1-libgcc
 	touch $@
@@ -71,10 +67,6 @@ $(prefix)/meta/$(target)-glibc: $(prefix)/meta/$(target)-gcc-stage1-libgcc
 
 $(prefix)/meta/$(target)-uclibc: $(prefix)/meta/$(target)-gcc-stage1-libgcc
 	$(MAKE) -f packages/uclibc/Makefile install
-	touch $@
-
-$(prefix)/meta/$(target)-newlib: $(prefix)/meta/$(target)-gcc-stage1-libgcc
-	$(MAKE) -f packages/newlib/Makefile install
 	touch $@
 
 $(prefix)/meta/$(target)-gcc: $(prefix)/meta/$(target)-$(libc)
