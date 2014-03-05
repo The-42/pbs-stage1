@@ -1,7 +1,7 @@
 release = 2012.08
 
 downloaddir = download
-top_builddir = build
+top_builddir = $(prefix)/build
 builddir = $(top_builddir)
 
 prefix = ${HOME}/pbs-stage1
