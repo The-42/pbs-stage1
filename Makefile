@@ -1,9 +1,6 @@
 all:
 
-ifndef TARGET
-  $(error TARGET undefined)
-endif
-
+ifdef TARGET
 include targets/$(TARGET).mk
 include defs.mk
 
@@ -12,13 +9,10 @@ ifeq ($(libc),gnu)
 endif
 
 export arch cpu os libc abi fp target
+endif
 
 $(prefix)/meta $(builddir):
 	mkdir -p $@
-
-$(prefix)/meta/$(target)-binutils: | $(prefix)/meta
-	$(MAKE) -f packages/binutils/Makefile install
-	touch $@
 
 $(prefix)/meta/m4: | $(prefix)/meta
 	$(MAKE) -f packages/m4/Makefile install
@@ -40,8 +34,15 @@ $(prefix)/meta/mpc: $(prefix)/meta/gmp $(prefix)/meta/mpfr
 	$(MAKE) -f packages/mpc/Makefile install
 	touch $@
 
+gcc-libs: $(prefix)/meta/mpc $(prefix)/meta/ppl
+
+ifneq ($(target),)
 $(prefix)/meta/$(target)-linux:
 	$(MAKE) -f packages/linux/Makefile install
+	touch $@
+
+$(prefix)/meta/$(target)-binutils: | $(prefix)/meta
+	$(MAKE) -f packages/binutils/Makefile install
 	touch $@
 
 $(prefix)/meta/$(target)-gcc-stage1: $(prefix)/meta/$(target)-binutils $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/$(target)-linux
@@ -88,6 +89,11 @@ $(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
 
 gdb: $(prefix)/meta/$(target)-gdb
 
+targets += gcc gdb
+else
+targets += gcc-libs
+endif
+
 $(prefix)/meta/libtool:
 	$(MAKE) -f packages/libtool/Makefile install
 	touch $@
@@ -124,6 +130,6 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-targets = gcc gdb libtool pkgconfig ccache autoconf automake ncurses
+targets += libtool pkgconfig ccache autoconf automake ncurses
 
 all: $(targets)
