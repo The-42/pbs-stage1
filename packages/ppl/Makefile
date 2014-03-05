@@ -4,11 +4,7 @@ version = 1.0
 location = http://bugseng.com/products/$(package)/download/ftp/releases/$(version)
 tarballs = $(package)-$(version).tar.xz
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)
-srcdir = $(CURDIR)/packages/$(package)
-
-include packages/common.mk
+include packages/all-package.mk
 
 conf-args = \
 	--prefix=$(prefix) \

@@ -3,12 +3,9 @@ version = 0.9.33.2
 
 location = http://uclibc.org/downloads
 tarballs = uClibc-$(version).tar.xz
+pkgbasedir = uClibc-$(version)
 
-pkgsrcdir = $(builddir)/uClibc-$(version)
-pkgbuilddir = $(pkgsrcdir)/target-$(target)
-srcdir = $(CURDIR)/packages/$(package)
-
-include packages/common.mk
+include packages/target-package.mk
 
 ifeq ($(arch),arm)
   ifeq ($(fp),hard)

@@ -6,11 +6,7 @@ major = $(word 1,$(subst ., ,$(version)))
 location = https://www.kernel.org/pub/linux/kernel/v$(major).x
 tarballs = $(package)-$(version).tar.xz
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)/target-$(target)
-srcdir = $(CURDIR)/packages/$(package)
-
-include packages/common.mk
+include packages/target-package.mk
 
 ifeq ($(arch),powerpc)
   defconfig = ppc64_defconfig

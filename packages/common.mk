@@ -1,5 +1,13 @@
 include defs.mk
 
+#
+# Directories
+#
+pkgbasedir ?= $(package)-$(version)
+pkgsrcdir = $(builddir)/$(pkgbasedir)
+srcdir = $(CURDIR)/packages/$(package)
+pkgpatchdir = $(srcdir)/patches
+
 download-files = $(addprefix $(downloaddir)/,$(tarballs))
 
 $(downloaddir) $(builddir):

@@ -4,10 +4,7 @@ version = 0.28
 location = http://pkgconfig.freedesktop.org/releases
 tarballs = $(package)-$(version).tar.gz
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)
-
-include packages/common.mk
+include packages/all-package.mk
 
 conf-args = \
 	--prefix=$(prefix) \

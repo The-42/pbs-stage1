@@ -4,10 +4,7 @@ version = 2.24
 location = http://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.bz2
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)/target-$(target)
-
-include packages/common.mk
+include packages/target-package.mk
 
 conf-args = \
 	--target=$(host) \

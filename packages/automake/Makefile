@@ -4,10 +4,7 @@ version = 1.12.6
 location = http://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)
-
-include packages/common.mk
+include packages/all-package.mk
 
 conf-args = \
 	--prefix=$(prefix)

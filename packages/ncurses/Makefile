@@ -4,10 +4,7 @@ version = 5.9
 location = http://ftp.gnu.org/pub/gnu/$(package)
 tarballs = $(package)-$(version).tar.gz
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)
-
-include packages/common.mk
+include packages/all-package.mk
 
 conf-args = \
 	--prefix=$(prefix) \

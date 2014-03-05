@@ -4,11 +4,7 @@ version = 7.7
 location = http://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.bz2
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)/target-$(target)
-srcdir = $(CURDIR)/packages/$(package)
-
-include packages/common.mk
+include packages/target-package.mk
 
 conf-args = \
 	--target=$(host) \

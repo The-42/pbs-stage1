@@ -4,10 +4,7 @@ version = 1.0.1
 location = http://www.multiprecision.org/$(package)/download
 tarballs = $(package)-$(version).tar.gz
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)
-
-include packages/common.mk
+include packages/all-package.mk
 
 conf-args = \
 	--prefix=$(prefix) \

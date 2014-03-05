@@ -4,11 +4,7 @@ version = 4.7.3
 location = http://ftp.gnu.org/pub/gnu/$(package)/$(package)-$(version)
 tarballs = $(package)-$(version).tar.bz2
 
-pkgsrcdir = $(builddir)/$(package)-$(version)
-pkgbuilddir = $(pkgsrcdir)/target-$(target)
-srcdir = $(CURDIR)/packages/$(package)
-
-include packages/common.mk
+include packages/target-package.mk
 
 $(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
 	cd $(pkgsrcdir) && QUILT_PATCHES=$(srcdir)/patches \
