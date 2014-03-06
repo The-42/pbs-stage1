@@ -4,6 +4,9 @@ version = 1.0
 location = http://bugseng.com/products/$(package)/download/ftp/releases/$(version)
 tarballs = $(package)-$(version).tar.xz
 
+patches = \
+	gmp-5.1.0.patch
+
 include packages/all-package.mk
 
 conf-args = \
@@ -16,11 +19,7 @@ conf-args = \
 	--disable-static \
 	--disable-optimization
 
-$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
-	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/gmp-5.1.0.patch
-	touch $@
-
-install: $(pkgsrcdir)/stamp-patched
+install: | $(pkgsrcdir)
 	cd $(pkgbuilddir) && ./configure $(conf-args)
 	cd $(pkgbuilddir) && $(MAKE) -j $(num-jobs)
 	cd $(pkgbuilddir) && $(MAKE) install

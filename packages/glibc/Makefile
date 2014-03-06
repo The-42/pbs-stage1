@@ -4,14 +4,11 @@ version = 2.17
 location = http://ftp.gnu.org/pub/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
 
+patches = \
+	make-4.patch
+
 include packages/target-package.mk
-
-$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
-	cd $(pkgsrcdir) && QUILT_PATCHES=$(srcdir)/patches \
-		quilt --quiltrc /dev/null push -a || test $$? = 2
-	touch $@
-
-$(pkgbuilddir): $(pkgsrcdir)/stamp-patched | $(pkgsrcdir)
+$(pkgbuilddir): | $(pkgsrcdir)
 	mkdir -p $@
 
 $(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: | $(pkgbuilddir)

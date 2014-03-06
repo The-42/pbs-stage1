@@ -5,6 +5,11 @@ location = http://uclibc.org/downloads
 tarballs = uClibc-$(version).tar.xz
 pkgbasedir = uClibc-$(version)
 
+patches = \
+	config-path-len.patch \
+	out-of-tree.patch \
+	arg-max.patch
+
 include packages/target-package.mk
 
 ifeq ($(arch),arm)
@@ -23,13 +28,7 @@ common-vars = \
 	DEVEL_PREFIX=/usr/ \
 	PREFIX=$(sysroot)
 
-$(pkgsrcdir)/.patch: | $(pkgsrcdir)
-	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/config-path-len.patch
-	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/out-of-tree.patch
-	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/arg-max.patch
-	touch $@
-
-$(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: $(pkgsrcdir)/.patch
+$(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: | $(pkgsrcdir)
 	mkdir -p $@
 
 $(pkgbuilddir)/stage1/.config: $(defconfig) | $(pkgbuilddir)/stage1

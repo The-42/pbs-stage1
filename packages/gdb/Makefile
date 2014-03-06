@@ -4,6 +4,9 @@ version = 7.7
 location = http://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.bz2
 
+patches = \
+	disable-docs.patch
+
 include packages/target-package.mk
 
 conf-args = \
@@ -22,11 +25,7 @@ endif
 $(pkgbuilddir): | $(pkgsrcdir)
 	mkdir -p $@
 
-$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
-	cd $(pkgsrcdir) && patch -p1 < $(srcdir)/patches/disable-docs.patch
-	touch $@
-
-install: $(pkgsrcdir)/stamp-patched | $(pkgbuilddir)
+install: | $(pkgbuilddir)
 	cd $(pkgbuilddir) && $(env) ../configure $(conf-args) $(conf-vars)
 	cd $(pkgbuilddir) && $(env) $(MAKE) -j $(num-jobs)
 	cd $(pkgbuilddir) && $(env) $(MAKE) install

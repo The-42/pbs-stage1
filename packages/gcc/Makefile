@@ -4,14 +4,12 @@ version = 4.7.3
 location = http://ftp.gnu.org/pub/gnu/$(package)/$(package)-$(version)
 tarballs = $(package)-$(version).tar.bz2
 
+patches = \
+	update-arm-linker.patch
+
 include packages/target-package.mk
 
-$(pkgsrcdir)/stamp-patched: | $(pkgsrcdir)
-	cd $(pkgsrcdir) && QUILT_PATCHES=$(srcdir)/patches \
-		quilt --quiltrc /dev/null push -a || test $$? = 2
-	touch $@
-
-$(pkgbuilddir)/stage1: $(pkgsrcdir)/stamp-patched | $(pkgsrcdir)
+$(pkgbuilddir)/stage1: | $(pkgsrcdir)
 	mkdir -p $@
 
 stage1-conf-args = \
