@@ -18,19 +18,18 @@ ifeq ($(arch),sh4)
   arch = sh
 endif
 
-$(pkgbuilddir): | $(pkgsrcdir)
-	mkdir -p $@
-
-common-vars = \
+pkg-cwd = $(pkgsrcdir)
+conf-cmd = $(MAKE)
+conf-goal = $(defconfig)
+conf-args = \
 	O=target-$(host) \
 	ARCH=$(arch)
 
-install-vars = \
+# There is nothing to build
+build-cmd = true
+build-args =
+
+install-goal = headers_install
+install-args = \
 	INSTALL_HDR_PATH=$(sysroot-prefix) \
-	$(common-vars)
-
-install: | $(pkgbuilddir)
-	cd $(pkgsrcdir) && $(MAKE) $(common-vars) $(defconfig)
-	cd $(pkgsrcdir) && $(MAKE) $(install-vars) headers_install
-
-.PHONY: install
+	$(conf-args)

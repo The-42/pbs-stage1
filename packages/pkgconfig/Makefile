@@ -6,15 +6,5 @@ tarballs = $(package)-$(version).tar.gz
 
 include packages/all-package.mk
 
-conf-args = \
-	--prefix=$(prefix) \
-	--infodir=$(prefix)/share/info \
-	--mandir=$(prefix)/share/man \
+conf-args += \
 	--with-internal-glib
-
-install: | $(pkgbuilddir)
-	cd $(pkgbuilddir) && ./configure $(conf-args)
-	cd $(pkgbuilddir) && $(MAKE) -j $(num-jobs)
-	cd $(pkgbuilddir) && $(MAKE) install
-
-.PHONY: install

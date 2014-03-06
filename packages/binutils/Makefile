@@ -6,24 +6,6 @@ tarballs = $(package)-$(version).tar.bz2
 
 include packages/target-package.mk
 
-conf-args = \
-	--target=$(host) \
-	--prefix=$(prefix) \
-	--datadir=$(exec-prefix)/share \
-	--infodir=$(exec-prefix)/share/info \
-	--mandir=$(exec-prefix)/share/man \
-	--libdir=$(exec-prefix)/lib \
-	--with-pkgversion="PBS $(release)" \
-	--with-sysroot=$(sysroot) \
+conf-args += \
 	--disable-multilib \
 	--disable-nls
-
-$(pkgbuilddir): | $(pkgsrcdir)
-	mkdir -p $@
-
-install: | $(pkgbuilddir)
-	cd $(pkgbuilddir) && ../configure $(conf-args)
-	cd $(pkgbuilddir) && $(MAKE) -j $(num-jobs)
-	cd $(pkgbuilddir) && $(MAKE) install
-
-.PHONY: install

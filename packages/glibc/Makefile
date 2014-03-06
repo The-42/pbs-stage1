@@ -7,14 +7,11 @@ tarballs = $(package)-$(version).tar.xz
 patches = \
 	make-4.patch
 
+stages = stage1 stage2
+
 include packages/target-package.mk
-$(pkgbuilddir): | $(pkgsrcdir)
-	mkdir -p $@
 
-$(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: | $(pkgbuilddir)
-	mkdir -p $@
-
-install-vars = \
+install-args = \
 	install_root=$(sysroot) \
 	DESTDIR=$(sysroot) \
 	prefix=/usr
@@ -29,16 +26,15 @@ stage1-conf-args = \
 	--mandir=/usr/share/man \
 	--program-prefix=$(target)- \
 	--with-headers=$(sysroot-prefix)/include \
-	--enable-addons=ports
-
-stage1-conf-vars = \
+	--enable-addons=ports \
 	libc_cv_forced_unwind=yes
 
-install-stage1: | $(pkgbuilddir)/stage1
-	cd $(pkgbuilddir)/stage1 && \
-		$(env) ../../configure $(stage1-conf-args) $(stage1-conf-vars)
-	cd $(pkgbuilddir)/stage1 && \
-		$(env) $(MAKE) $(install-vars) install-headers
+stage1-build-cmd = true
+stage1-build-args =
+
+stage1-install-goal = install-headers
+
+install-stage1:
 	touch $(sysroot-prefix)/include/gnu/stubs.h
 
 stage2-conf-args = \
@@ -51,9 +47,7 @@ stage2-conf-args = \
 	--mandir=/usr/share/man \
 	--program-prefix=$(target)- \
 	--with-headers=$(sysroot-prefix)/include \
-	--enable-addons=ports
-
-stage2-conf-vars = \
+	--enable-addons=ports \
 	libc_cv_ssp=no
 
 #
@@ -63,18 +57,8 @@ stage2-conf-vars = \
 # build system to not build the problematic programs.
 #
 ifeq ($(arch),ia64)
-install: $(pkgbuilddir)/stage2/configparms
+build-stage2: $(pkgbuilddir)/stage2/configparms
 
 $(pkgbuilddir)/stage2/configparms:
 	echo "build-programs = no" > $@
 endif
-
-install: | $(pkgbuilddir)/stage2
-	cd $(pkgbuilddir)/stage2 && \
-		$(env) ../../configure $(stage2-conf-args) $(stage2-conf-vars)
-	cd $(pkgbuilddir)/stage2 && \
-		$(env) $(MAKE) -j $(num-jobs)
-	cd $(pkgbuilddir)/stage2 && \
-		$(env) $(MAKE) $(install-vars) install
-
-.PHONY: install-stage1 install

@@ -8,13 +8,3 @@ patches = \
 	glibc-2.17.patch
 
 include packages/all-package.mk
-
-conf-args = \
-	--prefix=$(prefix)
-
-install: | $(pkgsrcdir)
-	cd $(pkgbuilddir) && ./configure $(conf-args)
-	cd $(pkgbuilddir) && $(MAKE) -j $(num-jobs)
-	cd $(pkgbuilddir) && $(MAKE) install
-
-.PHONY: install

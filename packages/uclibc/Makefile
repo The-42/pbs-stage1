@@ -10,6 +10,8 @@ patches = \
 	out-of-tree.patch \
 	arg-max.patch
 
+stages = stage1 stage2
+
 include packages/target-package.mk
 
 ifeq ($(arch),arm)
@@ -22,39 +24,28 @@ else
   defconfig = $(srcdir)/configs/$(arch)_defconfig
 endif
 
-common-vars = \
+conf-args = \
 	CROSS_COMPILE=$(target)- \
 	RUNTIME_PREFIX=/usr/ \
 	DEVEL_PREFIX=/usr/ \
-	PREFIX=$(sysroot)
+	PREFIX=$(sysroot) \
+	O=$(pkgoutputdir)
 
-$(pkgbuilddir)/stage1 $(pkgbuilddir)/stage2: | $(pkgsrcdir)
-	mkdir -p $@
-
-$(pkgbuilddir)/stage1/.config: $(defconfig) | $(pkgbuilddir)/stage1
+$(pkgbuilddir)/stage1/.config $(pkgbuilddir)/stage2/.config: $(defconfig)
+	mkdir -p $(@D)
 	cp $< $@
 
-stage1-vars = \
-	O=$(pkgbuilddir)/stage1 \
-	$(common-vars)
+pkg-cwd = $(pkgsrcdir)
+conf-cmd = $(MAKE)
+conf-goal = oldconfig
+# No build step is needed
+stage1-build-cmd = true
+stage1-install-args = $(conf-args)
+stage1-install-goal = install_headers
 
-install-stage1: $(pkgbuilddir)/stage1/.config
-	cd $(pkgsrcdir) && $(env) $(MAKE) $(stage1-vars) oldconfig
-	cd $(pkgsrcdir) && $(env) $(MAKE) $(stage1-vars) install_headers
+build-stage1: $(pkgbuilddir)/stage1/.config
 
-$(pkgbuilddir)/stage2/.config: $(defconfig) | $(pkgbuilddir)/stage2
-	cp $< $@
+stage2-build-args = $(conf-args)
+stage2-install-args = $(conf-args)
 
-stage2-vars = \
-	O=$(pkgbuilddir)/stage2 \
-	$(common-vars)
-
-install: $(pkgbuilddir)/stage2/.config
-	cd $(pkgsrcdir) && \
-		$(env) $(MAKE) $(stage2-vars) oldconfig
-	cd $(pkgsrcdir) && \
-		$(env) $(MAKE) -j $(num-jobs) $(stage2-vars)
-	cd $(pkgsrcdir) && \
-		$(env) $(MAKE) -j $(num-jobs) $(stage2-vars) install
-
-.PHONY: install-stage1 install
+build-stage2: $(pkgbuilddir)/stage2/.config
