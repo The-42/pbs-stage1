@@ -36,7 +36,7 @@ $(pkgbuilddir)/stage1/.config: $(defconfig) | $(pkgbuilddir)/stage1
 	cp $< $@
 
 stage1-vars = \
-	O=$(CURDIR)/$(pkgbuilddir)/stage1 \
+	O=$(pkgbuilddir)/stage1 \
 	$(common-vars)
 
 install-stage1: $(pkgbuilddir)/stage1/.config
@@ -47,7 +47,7 @@ $(pkgbuilddir)/stage2/.config: $(defconfig) | $(pkgbuilddir)/stage2
 	cp $< $@
 
 stage2-vars = \
-	O=$(CURDIR)/$(pkgbuilddir)/stage2 \
+	O=$(pkgbuilddir)/stage2 \
 	$(common-vars)
 
 install: $(pkgbuilddir)/stage2/.config
