@@ -7,6 +7,7 @@ tarballs = $(package)-$(version).tar.gz
 include packages/all-package.mk
 
 conf-args = \
+	--with-shared \
 	--prefix=$(prefix) \
 	--infodir=$(prefix)/share/info \
 	--mandir=$(prefix)/share/man
