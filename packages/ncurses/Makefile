@@ -8,6 +8,7 @@ include packages/all-package.mk
 
 conf-args = \
 	--with-shared \
+	--enable-rpath \
 	--prefix=$(prefix) \
 	--infodir=$(prefix)/share/info \
 	--mandir=$(prefix)/share/man
