@@ -2,7 +2,6 @@ all:
 
 ifdef TARGET
 include targets/$(TARGET).mk
-include defs.mk
 
 ifeq ($(libc),gnu)
   libc = glibc
@@ -10,6 +9,7 @@ endif
 
 export arch cpu os libc abi fp target
 endif
+include defs.mk
 
 $(prefix)/meta $(builddir):
 	mkdir -p $@
