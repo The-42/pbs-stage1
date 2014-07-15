@@ -2,6 +2,8 @@
 
 PREFIX=toolchains
 
+BLACKLIST="x86_64-unknown-linux-gnu"
+
 if ! test -z $1; then
 	PREFIX=`readlink -m $1`
 fi
@@ -27,5 +29,9 @@ for f in $FILES
 do
 	target=`basename "$f" .mk`
 	echo "Processing target $target..."
+	case $target in $BLACKLIST)
+		echo "-> Skipping blacklisted"
+		continue;
+	esac
 	ionice nice make prefix=$PREFIX TARGET=$target
 done
