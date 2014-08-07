@@ -36,6 +36,6 @@ Requirements
 
 - make, autoconf, m4
 - gcc, g++
-- patch, quilt
+- patch
 - texinfo
 - wget, tar
