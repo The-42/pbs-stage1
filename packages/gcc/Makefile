@@ -1,11 +1,8 @@
 package = gcc
-version = 4.7.3
+version = 4.9.3
 
 location = http://ftp.gnu.org/pub/gnu/$(package)/$(package)-$(version)
 tarballs = $(package)-$(version).tar.bz2
-
-patches = \
-	update-arm-linker.patch
 
 stages = stage1 stage1-libgcc stage2
 
