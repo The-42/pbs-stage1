@@ -5,7 +5,7 @@ PREFIX=toolchains
 BLACKLIST="x86_64-unknown-linux-gnu"
 
 if ! test -z $1; then
-	PREFIX=`readlink -m $1`
+	PREFIX=`readlink -f $1` || exit 1
 fi
 
 if ! test -d build; then
