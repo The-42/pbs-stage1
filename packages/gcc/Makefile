@@ -85,6 +85,10 @@ else
   stage2-conf-args += --disable-multilib
 endif
 
+ifeq ($(libc),uclibc)
+  stage2-conf-args += --disable-libsanitizer
+endif
+
 install-stage2:
 	rm $(prefix)/bin/$(target)-gcc && \
 		sed -e 's,@VERSION@,$(version),' support/gcc.in > $(prefix)/bin/$(target)-gcc && \
