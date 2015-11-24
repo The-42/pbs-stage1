@@ -4,8 +4,8 @@ PREFIX=toolchains
 
 BLACKLIST="x86_64-unknown-linux-gnu"
 
-if ! test -z $1; then
-	PREFIX=`readlink -f $1` || exit 1
+if ! test -z "$1"; then
+	PREFIX=`readlink -f "$1"` || exit 1
 fi
 
 if ! test -d build; then
@@ -13,25 +13,25 @@ if ! test -d build; then
 	mkdir -p build
 fi
 
-if ! test -d $PREFIX; then
+if ! test -d "$PREFIX"; then
 	echo "Creating target directory..."
-	mkdir -p $PREFIX
-	if ! test -d $PREFIX; then
-		echo "Failed to create directory $PREFIX."
+	mkdir -p "$PREFIX"
+	if ! test -d "$PREFIX"; then
+		echo "Failed to create directory \`$PREFIX'."
 		exit 1
 	fi
 fi
 
-echo "Using target dir $PREFIX"
+echo "Using target dir \`$PREFIX'"
 FILES=./targets/*
 
 for f in $FILES
 do
 	target=`basename "$f" .mk`
 	echo "Processing target $target..."
-	case $target in $BLACKLIST)
+	case "$target" in $BLACKLIST)
 		echo "-> Skipping blacklisted"
 		continue;
 	esac
-	ionice nice make prefix=$PREFIX TARGET=$target
+	ionice nice make prefix="$PREFIX" TARGET="$target"
 done
