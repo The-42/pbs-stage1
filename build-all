@@ -8,11 +8,6 @@ if ! test -z "$1"; then
 	PREFIX=`readlink -f "$1"` || exit 1
 fi
 
-if ! test -d build; then
-	echo "Creating build directory..."
-	mkdir -p build
-fi
-
 if ! test -d "$PREFIX"; then
 	echo "Creating target directory..."
 	mkdir -p "$PREFIX"
