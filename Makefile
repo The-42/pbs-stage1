@@ -82,7 +82,7 @@ $(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
 gdb: $(prefix)/meta/$(target)-gdb
 
 
-$(prefix)/meta/test-$(target)-compiler:
+$(prefix)/meta/test-$(target)-compiler: | $(prefix)/tests
 	$(MAKE) -f tests/Makefile compiler
 	touch $@
 

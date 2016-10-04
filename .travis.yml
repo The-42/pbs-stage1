@@ -1,0 +1,31 @@
+language: c
+
+sudo: required
+dist: trusty
+
+compiler:
+  - gcc
+
+before_script:
+  - make
+
+script: make TARGET=${pbsarch}
+
+env:
+  - pbsarch=alpha-linux-gnu
+  - pbsarch=arm-unknown-linux-gnueabi
+  - pbsarch=arm-unknown-linux-uclibceabi
+  - pbsarch=armv7l-unknown-linux-gnueabihf
+  - pbsarch=armv7l-unknown-linux-uclibceabihf
+  - pbsarch=i786-pc-linux-gnu
+  - pbsarch=i786-pc-linux-uclibc
+  - pbsarch=ia64-linux-gnu
+  - pbsarch=m68k-linux-gnu
+  - pbsarch=mipsel-linux-gnu
+  - pbsarch=mips-linux-gnu
+  - pbsarch=powerpc-unknown-linux-gnu
+  - pbsarch=powerpc-unknown-linux-uclibc
+  - pbsarch=s390-linux-gnu
+  - pbsarch=sh4-linux-gnu
+  - pbsarch=sparc-linux-gnu
+  - pbsarch=x86_64-unknown-linux-gnu
