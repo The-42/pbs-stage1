@@ -11,7 +11,7 @@ export arch cpu os libc abi fp target
 endif
 include defs.mk
 
-$(prefix)/meta $(builddir):
+$(prefix)/meta $(prefix)/tests $(builddir):
 	mkdir -p $@
 
 $(prefix)/meta/m4: | $(prefix)/meta
@@ -81,7 +81,14 @@ $(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
 
 gdb: $(prefix)/meta/$(target)-gdb
 
-targets += gcc gdb
+
+$(prefix)/meta/test-$(target)-compiler:
+	$(MAKE) -f tests/Makefile compiler
+	touch $@
+
+compiler-test: $(prefix)/meta/test-$(target)-compiler
+
+targets += gcc gdb compiler-test
 else
 targets += gcc-libs
 endif
