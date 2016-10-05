@@ -9,7 +9,9 @@ compiler:
 before_script:
   - make
 
-script: make TARGET=${pbsarch}
+script: make -s --no-print-directory TARGET=${pbsarch} 1>build.log
+
+after_script: echo -e "\n\n\n\tPOST-MORTEM stdout\n" && tail -n 2000 build.log
 
 env:
   - pbsarch=alpha-linux-gnu
