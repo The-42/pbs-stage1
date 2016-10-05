@@ -10,4 +10,5 @@ conf-args = \
 	--mandir=$(exec-prefix)/share/man \
 	--with-pkgversion="PBS $(release)" \
 	--with-sysroot=$(sysroot) \
-	--program-prefix=$(target)-
+	--program-prefix=$(target)- \
+	--enable-silent-rules
