@@ -6,6 +6,9 @@ dist: trusty
 compiler:
   - gcc
 
+before_install:
+  - sudo update-alternatives --set awk /usr/bin/gawk
+
 before_script:
   - make
 
