@@ -1,20 +1,19 @@
 package = glibc
-version = 2.17
+version = 2.24
 
 location = http://ftp.gnu.org/pub/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
 
-patches = \
-	make-4.patch
-
 stages = stage1 stage2
+
+# glibc is picky and fails if prefix is sensed on the command line.
+MAKEOVERRIDES := $(filter-out prefix=%,$(MAKEOVERRIDES))
 
 include packages/target-package.mk
 
 install-args = \
 	install_root=$(sysroot) \
-	DESTDIR=$(sysroot) \
-	prefix=/usr
+	DESTDIR=$(sysroot)
 
 stage1-conf-args = \
 	--build=$(build) \
