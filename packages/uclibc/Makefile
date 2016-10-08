@@ -8,7 +8,8 @@ pkgbasedir = uClibc-$(version)
 patches = \
 	config-path-len.patch \
 	out-of-tree.patch \
-	arg-max.patch
+	arg-max.patch \
+	linux-types.patch
 
 stages = stage1 stage2
 
