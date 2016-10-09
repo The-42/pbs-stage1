@@ -59,5 +59,6 @@ ifeq ($(arch),ia64)
 build-stage2: $(pkgbuilddir)/stage2/configparms
 
 $(pkgbuilddir)/stage2/configparms:
+	mkdir -p $(pkgbuilddir)/stage2
 	echo "build-programs = no" > $@
 endif
