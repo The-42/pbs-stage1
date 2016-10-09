@@ -29,5 +29,5 @@ env:
   - pbsarch=powerpc-unknown-linux-uclibc
   - pbsarch=s390-linux-gnu
   - pbsarch=sh4-linux-gnu
-  - pbsarch=sparc-linux-gnu
+  - pbsarch=sparc64-linux-gnu
   - pbsarch=x86_64-unknown-linux-gnu

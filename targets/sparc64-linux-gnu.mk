@@ -1,4 +1,4 @@
-arch = sparc
+arch = sparc64
 os = linux
 libc = gnu
 

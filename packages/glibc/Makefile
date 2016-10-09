@@ -50,6 +50,17 @@ stage2-conf-args = \
 	libc_cv_ssp=no
 
 #
+# Workaround for glibc bug on sparc64 arch. See
+# https://sourceware.org/bugzilla/show_bug.cgi?id=19477
+#
+# Optimisation and -g get lost if CFLAGS are given, so set them here as well.
+#
+ifeq ($(arch),sparc64)
+stage2-conf-args += \
+	CFLAGS='-O2 -g -mcpu=ultrasparc'
+endif
+
+#
 # On IA64, the programs built by glibc cannot be properly linked because
 # they reference symbols defined only by the shared libunwind that is
 # only built by stage2 of gcc. We work around this by instructing the
