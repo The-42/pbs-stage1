@@ -47,7 +47,8 @@ stage2-conf-args = \
 	--program-prefix=$(target)- \
 	--with-headers=$(sysroot-prefix)/include \
 	--enable-addons=ports \
-	libc_cv_ssp=no
+	libc_cv_ssp=no \
+	libc_cv_ssp_strong=no
 
 #
 # Workaround for glibc bug on sparc64 arch. See
