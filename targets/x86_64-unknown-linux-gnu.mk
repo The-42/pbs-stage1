@@ -1,5 +1,5 @@
 arch = x86_64
-cpu = unknown
+cpu = cross
 os = linux
 libc = gnu
 
