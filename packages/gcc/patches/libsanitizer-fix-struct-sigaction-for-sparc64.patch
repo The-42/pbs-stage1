@@ -1,0 +1,47 @@
+From 9af4710c25fbcb759d9c8c38382356afbea22fc7 Mon Sep 17 00:00:00 2001
+From: Bert van Hall <bert.vanhall@avionic-design.de>
+Date: Mon, 10 Oct 2016 19:59:44 +0200
+Subject: [PATCH] libsanitizer: fix struct sigaction for sparc64
+
+From https://patchwork.ozlabs.org/patch/668901/
+
+The root cause is that `struct sigaction' has changed layout in glibc
+twice recently, first an unintended ABI change in glibc-2.20, and then
+the correction in glibc-2.22 (backported to the .20 and .21 branches).
+(See glibc bz#18694).  Around the time of the first change, libsanitizer
+was changed to match, but it wasn't updated for the correction.  The end
+result is an ABI mismatch and assertion errors during compilation of
+libsanitizer.  (The sa_flags field is of the wrong size and at the wrong
+offset.)
+
+Fixed by adjusting the SPARC part of libsanitizer's sigaction struct
+to match glibc (except for the broken .20 and .21 initial releases).
+
+Original-author: Mikael Pettersson <mikpelinux@gmail.com>
+Signed-off-by: Bert van Hall <bert.vanhall@avionic-design.de>
+---
+ libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.h | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.h b/libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.h
+index aec9504..5f3fcf1 100644
+--- a/libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.h
++++ b/libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.h
+@@ -406,11 +406,10 @@ namespace __sanitizer {
+       void (*sa_sigaction)(int sig, void *siginfo, void *uctx);
+     };
+     __sanitizer_sigset_t sa_mask;
+-#if defined(__sparc__)
+-    unsigned long sa_flags;
+-#else
+-    int sa_flags;
++#if defined(__sparc__)  && defined(__arch64__)
++    int __glibc_reserved0;
+ #endif
++    int sa_flags;
+ #if SANITIZER_LINUX
+     void (*sa_restorer)();
+ #endif
+-- 
+2.1.0
+
