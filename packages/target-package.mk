@@ -12,3 +12,6 @@ conf-args = \
 	--with-sysroot=$(sysroot) \
 	--program-prefix=$(target)- \
 	--enable-silent-rules
+
+clean:
+	rm -rf $(wildcard $(pkgbuilddir)*)

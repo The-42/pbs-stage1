@@ -132,3 +132,18 @@ ncurses: $(prefix)/meta/ncurses
 targets += libtool pkg-config ccache autoconf automake ncurses
 
 all: $(targets)
+
+uninstall:
+	rm -rf $(prefix)/lib/gcc/$(target)
+	rm -rf $(wildcard $(prefix)/bin/$(target)-*)
+	rm -rf $(prefix)/$(target)
+	rm -rf $(wildcard $(prefix)/meta/$(target)-*)
+
+clean-tests:
+	$(MAKE) -f tests/Makefile clean
+	rm -f $(wildcard $(prefix)/meta/test-*)
+
+clean-%:
+	$(MAKE) -f packages/$*/Makefile clean
+
+clean: clean-binutils clean-gdb clean-gcc clean-glibc clean-uclibc clean-linux clean-tests

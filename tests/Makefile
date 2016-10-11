@@ -21,3 +21,5 @@ compiler-static:
 
 compiler: compiler-dynamic compiler-static
 
+clean:
+	rm -f $(testdir)/$(target)-test-*
