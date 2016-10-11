@@ -1,12 +1,8 @@
 package = ppl
-version = 1.0
+version = 1.2
 
-location = http://bugseng.com/products/$(package)/download/ftp/releases/$(version)
+location = http://ftp.avionic-design.de/pub/$(package)
 tarballs = $(package)-$(version).tar.xz
-
-patches = \
-	gmp-5.1.0.patch \
-	gcc4_9_compile.patch
 
 include packages/all-package.mk
 
