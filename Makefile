@@ -99,11 +99,11 @@ $(prefix)/meta/libtool:
 
 libtool: $(prefix)/meta/libtool
 
-$(prefix)/meta/pkgconfig:
-	$(MAKE) -f packages/pkgconfig/Makefile install
+$(prefix)/meta/pkg-config:
+	$(MAKE) -f packages/pkg-config/Makefile install
 	touch $@
 
-pkgconfig: $(prefix)/meta/pkgconfig
+pkgconfig pkg-config: $(prefix)/meta/pkg-config
 
 $(prefix)/meta/ccache:
 	$(MAKE) -f packages/ccache/Makefile install
@@ -129,6 +129,6 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-targets += libtool pkgconfig ccache autoconf automake ncurses
+targets += libtool pkg-config ccache autoconf automake ncurses
 
 all: $(targets)
