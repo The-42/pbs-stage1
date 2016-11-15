@@ -1,4 +1,4 @@
-release = 2016.03
+release = 2016.11
 
 downloaddir = download
 top_builddir = $(prefix)/build
