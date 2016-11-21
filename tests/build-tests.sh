@@ -2,21 +2,6 @@
 
 PREFIX=toolchains
 
-targets="alpha-linux-gnu"
-targets="$targets arm-unknown-linux-gnueabi"
-targets="$targets arm-unknown-linux-uclibceabi"
-targets="$targets armv7l-unknown-linux-gnueabihf"
-targets="$targets armv7l-unknown-linux-uclibceabihf"
-targets="$targets i786-pc-linux-gnu"
-targets="$targets ia64-linux-gnu"
-targets="$targets m68k-linux-gnu"
-targets="$targets mipsel-linux-gnu"
-targets="$targets mips-linux-gnu"
-targets="$targets powerpc-unknown-linux-gnu"
-targets="$targets s390-linux-gnu"
-targets="$targets sh4-linux-gnu"
-targets="$targets sparc-linux-gnu"
-
 total_failed=0
 total_skipped=0
 total_ok=0
@@ -62,12 +47,15 @@ BINDIR="$PREFIX/bin"
 PATH="$BINDIR:$PATH"
 
 SRCDIR=$(dirname "$(readlink -f "$0")")
+INDIR="$SRCDIR"/../targets
 OUTDIR="$SRCDIR"/build
 
 rm -rf "$OUTDIR"
 mkdir -p "$OUTDIR"
 
-for target in $targets; do
+for mktarget in "$INDIR"/* ; do
+	target="$(basename $mktarget)";
+	target="${target%???}"
 	test_start "$target, dynamically linked executable"
 	R=$T_FAIL
 	if [ -x "$BINDIR/$target-gcc" ]; then
