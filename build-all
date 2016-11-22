@@ -30,3 +30,6 @@ do
 	esac
 	ionice nice make prefix="$PREFIX" TARGET="$target"
 done
+
+echo
+echo 'All targets completed.'
