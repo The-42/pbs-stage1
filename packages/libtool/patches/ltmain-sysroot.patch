@@ -1,0 +1,42 @@
+From 0efb64051a6f4651ddaa08b5fd13b00323d79963 Mon Sep 17 00:00:00 2001
+From: Bert van Hall <bert.vanhall@avionic-design.de>
+Date: Wed, 18 Jan 2017 23:02:48 +0100
+Subject: [PATCH] ltmain sysroot
+
+This patch fixes a couple issues when building in a sysroot env.
+
+Signed-off-by: Bert van Hall <bert.vanhall@avionic-design.de>
+---
+ build-aux/ltmain.in | 2 +-
+ build-aux/ltmain.sh | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/build-aux/ltmain.in b/build-aux/ltmain.in
+index d5cf07a..ce97a5f 100644
+--- a/build-aux/ltmain.in
++++ b/build-aux/ltmain.in
+@@ -6449,7 +6449,7 @@ func_mode_link ()
+ 	      fi
+ 	    else
+ 	      # We cannot seem to hardcode it, guess we'll fake it.
+-	      add_dir=-L$libdir
++	      add_dir=-L$lt_sysroot$libdir
+ 	      # Try looking first in the location we're being installed to.
+ 	      if test -n "$inst_prefix_dir"; then
+ 		case $libdir in
+diff --git a/build-aux/ltmain.sh b/build-aux/ltmain.sh
+index 0f0a2da..22411ae 100644
+--- a/build-aux/ltmain.sh
++++ b/build-aux/ltmain.sh
+@@ -8361,7 +8361,7 @@ func_mode_link ()
+ 	      fi
+ 	    else
+ 	      # We cannot seem to hardcode it, guess we'll fake it.
+-	      add_dir=-L$libdir
++	      add_dir=-L$lt_sysroot$libdir
+ 	      # Try looking first in the location we're being installed to.
+ 	      if test -n "$inst_prefix_dir"; then
+ 		case $libdir in
+-- 
+2.7.4
+
