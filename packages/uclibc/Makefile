@@ -1,7 +1,7 @@
 package = uclibc
 version = 0.9.33.2
 
-location = http://uclibc.org/downloads
+location = https://uclibc.org/downloads
 tarballs = uClibc-$(version).tar.xz
 pkgbasedir = uClibc-$(version)
 

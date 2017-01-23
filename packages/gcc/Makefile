@@ -1,7 +1,7 @@
 package = gcc
 version = 4.9.4
 
-location = http://ftp.gnu.org/pub/gnu/$(package)/$(package)-$(version)
+location = https://ftp.gnu.org/pub/gnu/$(package)/$(package)-$(version)
 tarballs = $(package)-$(version).tar.bz2
 
 stages = stage1 stage1-libgcc stage2

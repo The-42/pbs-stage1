@@ -1,7 +1,7 @@
 package = ppl
 version = 1.2
 
-location = http://ftp.avionic-design.de/pub/$(package)
+location = https://ftp.avionic-design.de/pub/$(package)
 tarballs = $(package)-$(version).tar.xz
 
 include packages/all-package.mk

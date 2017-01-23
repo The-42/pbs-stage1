@@ -1,7 +1,7 @@
 package = glibc
 version = 2.24
 
-location = http://ftp.gnu.org/pub/gnu/$(package)
+location = https://ftp.gnu.org/pub/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
 
 stages = stage1 stage2
