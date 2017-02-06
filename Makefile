@@ -117,6 +117,12 @@ $(prefix)/meta/autoconf:
 
 autoconf: $(prefix)/meta/autoconf
 
+$(prefix)/meta/autoconf-archive:
+	$(MAKE) -f packages/autoconf-archive/Makefile install
+	touch $@
+
+autoconf-archive: $(prefix)/meta/autoconf-archive
+
 $(prefix)/meta/automake:
 	$(MAKE) -f packages/automake/Makefile install
 	touch $@
@@ -129,7 +135,7 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-targets += libtool pkg-config ccache autoconf automake ncurses
+targets += libtool pkg-config ccache autoconf autoconf-archive automake ncurses
 
 all: $(targets)
 
