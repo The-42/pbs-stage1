@@ -8,6 +8,10 @@ tarballs = $(package)-$(version).tar.xz
 
 include packages/target-package.mk
 
+ifeq ($(arch),aarch64)
+  arch = arm64
+endif
+
 ifeq ($(arch),powerpc)
   defconfig = ppc64_defconfig
 else

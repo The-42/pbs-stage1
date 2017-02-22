@@ -19,6 +19,7 @@ script: make -s --no-print-directory TARGET=${pbsarch} 1>build.log
 after_script: echo -e "\n\n\n\tPOST-MORTEM stdout\n" && tail -n 2000 build.log
 
 env:
+  - pbsarch=aarch64-unknown-linux-gnu
   - pbsarch=alpha-linux-gnu
   - pbsarch=arm-unknown-linux-gnueabi
   - pbsarch=arm-unknown-linux-uclibceabi
