@@ -11,6 +11,14 @@ export arch cpu os libc abi fp target
 endif
 include defs.mk
 
+$(prefix)/meta/_host-check: | $(prefix)/meta
+	support/prerequisites.sh
+	touch $@
+
+host-check: $(prefix)/meta/_host-check
+
+targets += host-check
+
 $(prefix)/meta $(prefix)/tests $(builddir):
 	mkdir -p $@
 
