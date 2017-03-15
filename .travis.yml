@@ -9,6 +9,14 @@ compiler:
 before_install:
   - sudo update-alternatives --set awk /usr/bin/gawk
   - sudo apt-get install help2man
+  - |
+    wget https://ftp.gnu.org/gnu/make/make-3.82.tar.gz
+    tar xf make-3.82.tar.gz && cd make-3.82
+    ./configure && make -j && sudo make install
+    cd .. && rm -rf make-3.82
+  - test -f /usr/local/bin/make && sudo mv /usr/bin/make /usr/bin/make-3.81 &&
+    sudo ln -s /usr/local/bin/make /usr/bin
+  - make --version
   - unset CC
 
 before_script:
