@@ -1,11 +1,8 @@
 package = pkg-config
-version = 0.29.1
+version = 0.29.2
 
 location = https://pkgconfig.freedesktop.org/releases
 tarballs = $(package)-$(version).tar.gz
-
-patches = \
-	fix-glib-compilation-with-gcc-6.patch
 
 include packages/all-package.mk
 
