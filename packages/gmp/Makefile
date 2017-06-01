@@ -1,5 +1,5 @@
 package = gmp
-version = 6.1.1
+version = 6.1.2
 
 location = https://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
