@@ -9,7 +9,8 @@ patches = \
 	config-path-len.patch \
 	out-of-tree.patch \
 	arg-max.patch \
-	linux-types.patch
+	linux-types.patch \
+	unwind-resume.patch
 
 stages = stage1 stage2
 
