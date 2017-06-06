@@ -6,6 +6,9 @@ tarballs = $(package)-$(version).tar.bz2
 
 stages = stage1 stage1-libgcc stage2
 
+patches = \
+	libsanitizer-fix-struct-sigaction-for-sparc64.patch
+
 include packages/target-package.mk
 
 stage1-conf-args = \
