@@ -6,6 +6,8 @@ dist: trusty
 compiler:
   - gcc
 
+cache: ccache
+
 before_install:
   - sudo update-alternatives --set awk /usr/bin/gawk
   - sudo apt-get install help2man
