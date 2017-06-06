@@ -9,6 +9,9 @@ stages = stage1 stage2
 # glibc is picky and fails if prefix is sensed on the command line.
 MAKEOVERRIDES := $(filter-out prefix=%,$(MAKEOVERRIDES))
 
+patches = \
+	sh-fix-building-with-gcc5_6.patch
+
 include packages/target-package.mk
 
 install-args = \
