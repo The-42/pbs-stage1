@@ -32,6 +32,7 @@ The available toolchains are defined in the "targets" subdirectory:
 
 	$ ls -1 targets/
 	aarch64-unknown-linux-gnu.mk
+	aarch64-unknown-linux-uclibc.mk
 	alpha-linux-gnu.mk
 	arm-unknown-linux-gnueabi.mk
 	arm-unknown-linux-uclibceabi.mk
