@@ -1,16 +1,13 @@
 package = uclibc
-version = 0.9.33.2
+version = 1.0.24
 
-location = https://uclibc.org/downloads
-tarballs = uClibc-$(version).tar.xz
-pkgbasedir = uClibc-$(version)
+location = https://downloads.uclibc-ng.org/releases/$(version)
+tarballs = uClibc-ng-$(version).tar.xz
+pkgbasedir = uClibc-ng-$(version)
 
 patches = \
-	config-path-len.patch \
-	out-of-tree.patch \
-	arg-max.patch \
-	linux-types.patch \
-	unwind-resume.patch
+	0001-Fix-path-length-issues.patch \
+	0002-utils-fix-out-of-tree-builds.patch
 
 stages = stage1 stage2
 
