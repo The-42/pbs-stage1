@@ -1,7 +1,7 @@
 package = mpc
 version = 1.0.3
 
-location = http://www.multiprecision.org/$(package)/download
+location = https://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.gz
 
 include packages/all-package.mk
