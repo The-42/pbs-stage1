@@ -63,9 +63,10 @@ for example to point to /opt or /usr/local.
 Development
 ===========
 
-Issues may be reported via [GitHub][bugs-github]. Pull requests are welcome,
-bear in mind though we might have different plans or use cases.
+Issues may be reported via [GitHub][bugs-github] in the original project. Pull
+requests might be welcome, but bear in mind they might have different plans or
+use cases.
 
   [bugs-github]: https://github.com/avionic-design/pbs-stage1/issues
-  [travis]: https://travis-ci.org/avionic-design/pbs-stage1
-  [travis-badge]: https://travis-ci.org/avionic-design/pbs-stage1.svg?branch=master
+  [travis]: https://travis-ci.org/the-42/pbs-stage1
+  [travis-badge]: https://travis-ci.org/the-42/pbs-stage1.svg?branch=master
