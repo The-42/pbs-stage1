@@ -7,7 +7,8 @@ tarballs = $(package)-$(version).tar.bz2
 stages = stage1 stage1-libgcc stage2
 
 patches = \
-	libsanitizer-fix-struct-sigaction-for-sparc64.patch
+	libsanitizer-fix-struct-sigaction-for-sparc64.patch \
+	Use_ucontext_t_not_struct_ucontext_in_linux-unwind.h_files.patch
 
 include packages/target-package.mk
 
