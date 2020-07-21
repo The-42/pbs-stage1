@@ -1,0 +1,50 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: "Bert van Hall" <bert.vanhall@gmx.de>
+Date: Tue, 21 Jul 2020 18:28:56 +0200
+Subject: [PATCH] Disable manpage generation
+
+Signed-off-by: Bert van Hall <bert.vanhall@gmx.de>
+
+diff --git a/Makefile.am b/Makefile.am
+index 13dfc63..12b5faa 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -416,10 +416,11 @@ update_mans = \
+ # files created in the build tree, so instead we regenerate the
+ # manual pages if the sources for the build-tree files we want to
+ # run have changed.
+-$(libtool_1): $(ltmain_sh)
+-	$(AM_V_GEN)$(update_mans) --help-option=--help-all libtool
+-$(libtoolize_1): $(libtoolize_in)
+-	$(AM_V_GEN)$(update_mans) libtoolize
++# [BvH] Disable manpage updates to avoid a help2man dependency
++#$(libtool_1): $(ltmain_sh)
++#	$(AM_V_GEN)$(update_mans) --help-option=--help-all libtool
++#$(libtoolize_1): $(libtoolize_in)
++#	$(AM_V_GEN)$(update_mans) libtoolize
+ 
+ 
+ ## ------------- ##
+diff --git a/Makefile.in b/Makefile.in
+index 178bdec..e50e430 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -2324,10 +2324,11 @@ $(notes_txt): $(notes_texi)
+ # files created in the build tree, so instead we regenerate the
+ # manual pages if the sources for the build-tree files we want to
+ # run have changed.
+-$(libtool_1): $(ltmain_sh)
+-	$(AM_V_GEN)$(update_mans) --help-option=--help-all libtool
+-$(libtoolize_1): $(libtoolize_in)
+-	$(AM_V_GEN)$(update_mans) libtoolize
++# [BvH] Disable manpage updates to avoid a help2man dependency
++#$(libtool_1): $(ltmain_sh)
++#	$(AM_V_GEN)$(update_mans) --help-option=--help-all libtool
++#$(libtoolize_1): $(libtoolize_in)
++#	$(AM_V_GEN)$(update_mans) libtoolize
+ 
+ install-data-local: $(lt_Makefile_in) install-scripts-local
+ 	@$(NORMAL_INSTALL)
+-- 
+2.17.1
+

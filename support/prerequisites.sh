@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tools_needed='gawk gcc g++ help2man make patch tar wget bc'
+tools_needed='gawk gcc g++ make patch tar wget bc'
 version_gxx=4.8
 version_make=3.82
 

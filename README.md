@@ -19,7 +19,6 @@ much is needed to get started:
 - wget
 - tar
 - gawk
-- help2man
 
 Building
 ========
