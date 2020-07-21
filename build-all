@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PREFIX=toolchains
+PREFIX=$(pwd)/toolchains
 
 BLACKLIST=
 
