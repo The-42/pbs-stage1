@@ -1,7 +1,7 @@
 package = mpfr
-version = 3.1.5
+version = 4.1.0
 
-location = http://www.mpfr.org/$(package)-$(version)
+location = https://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
 
 include packages/all-package.mk
