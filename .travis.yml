@@ -8,39 +8,7 @@ compiler:
 
 cache:
   directories:
-  - $HOME/pbs-stage1/build/autoconf-*
-  - $HOME/pbs-stage1/build/automake-*
-  - $HOME/pbs-stage1/build/bison-*
-  - $HOME/pbs-stage1/build/ccache-*
-  - $HOME/pbs-stage1/build/flex-*
-  - $HOME/pbs-stage1/build/gmp-*
-  - $HOME/pbs-stage1/build/libtool-*
-  - $HOME/pbs-stage1/build/m4-*
-  - $HOME/pbs-stage1/build/mpc-*
-  - $HOME/pbs-stage1/build/mpfr-*
-  - $HOME/pbs-stage1/build/ncurses-*
-  - $HOME/pbs-stage1/build/pkg-config-*
-  - $HOME/pbs-stage1/build/ppl-*
-  - $HOME/pbs-stage1/meta/_host-check
-  - $HOME/pbs-stage1/meta/autoconf
-  - $HOME/pbs-stage1/meta/autoconf-archive
-  - $HOME/pbs-stage1/meta/automake
-  - $HOME/pbs-stage1/meta/bison
-  - $HOME/pbs-stage1/meta/ccache
-  - $HOME/pbs-stage1/meta/flex
-  - $HOME/pbs-stage1/meta/gmp
-  - $HOME/pbs-stage1/meta/libtool
-  - $HOME/pbs-stage1/meta/m4
-  - $HOME/pbs-stage1/meta/mpc
-  - $HOME/pbs-stage1/meta/mpfr
-  - $HOME/pbs-stage1/meta/ncurses
-  - $HOME/pbs-stage1/meta/pkg-config
-  - $HOME/pbs-stage1/meta/ppl
-  - $HOME/pbs-stage1/bin
-  - $HOME/pbs-stage1/include
-  - $HOME/pbs-stage1/lib
-  - $HOME/pbs-stage1/share
-  - $HOME/pbs-stage1/tests
+  - $HOME/pbs-stage1/build/download
 
 before_install:
   - sudo update-alternatives --set awk /usr/bin/gawk
