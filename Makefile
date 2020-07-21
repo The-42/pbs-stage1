@@ -34,6 +34,10 @@ $(prefix)/meta/bison: | $(prefix)/meta
 	$(MAKE) -f packages/bison/Makefile install
 	touch $@
 
+$(prefix)/meta/flex: | $(prefix)/meta
+	$(MAKE) -f packages/flex/Makefile install
+	touch $@
+
 $(prefix)/meta/mpfr: $(prefix)/meta/gmp
 	$(MAKE) -f packages/mpfr/Makefile install
 	touch $@
@@ -46,7 +50,7 @@ $(prefix)/meta/mpc: $(prefix)/meta/gmp $(prefix)/meta/mpfr
 	$(MAKE) -f packages/mpc/Makefile install
 	touch $@
 
-gcc-libs: $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/bison
+gcc-libs: $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/bison $(prefix)/meta/flex
 
 ifneq ($(target),)
 $(prefix)/meta/$(target)-linux:
@@ -57,7 +61,7 @@ $(prefix)/meta/$(target)-binutils: | $(prefix)/meta
 	$(MAKE) -f packages/binutils/Makefile install
 	touch $@
 
-$(prefix)/meta/$(target)-gcc-stage1: $(prefix)/meta/$(target)-binutils $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/$(target)-linux $(prefix)/meta/bison
+$(prefix)/meta/$(target)-gcc-stage1: $(prefix)/meta/$(target)-binutils $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/$(target)-linux $(prefix)/meta/bison $(prefix)/meta/flex
 	$(MAKE) -f packages/gcc/Makefile install-stage1
 	touch $@
 
@@ -147,9 +151,11 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
+flex: $(prefix)/meta/flex
+
 bison: $(prefix)/meta/bison
 
-targets += libtool pkg-config ccache autoconf autoconf-archive automake ncurses bison
+targets += libtool pkg-config ccache autoconf autoconf-archive automake ncurses flex bison
 
 all: $(targets)
 
