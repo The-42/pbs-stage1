@@ -1,0 +1,35 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: "Bert van Hall" <bert.vanhall@gmx.de>
+Date: Wed, 22 Jul 2020 18:10:18 +0200
+Subject: [PATCH] disable docs
+
+Signed-off-by: Bert van Hall <bert.vanhall@gmx.de>
+
+diff --git a/binutils/Makefile.am b/binutils/Makefile.am
+index f1f3907b..70784197 100644
+--- a/binutils/Makefile.am
++++ b/binutils/Makefile.am
+@@ -20,8 +20,6 @@
+ AUTOMAKE_OPTIONS = dejagnu no-dist foreign subdir-objects
+ ACLOCAL_AMFLAGS = -I .. -I ../config -I ../bfd
+ 
+-SUBDIRS = doc po
+-
+ tooldir = $(exec_prefix)/$(target_alias)
+ 
+ ## These aren't set by automake, because they appear in
+diff --git a/binutils/Makefile.in b/binutils/Makefile.in
+index 39f08563..a3d1861e 100644
+--- a/binutils/Makefile.in
++++ b/binutils/Makefile.in
+@@ -560,7 +560,6 @@ zlibdir = @zlibdir@
+ zlibinc = @zlibinc@
+ AUTOMAKE_OPTIONS = dejagnu no-dist foreign subdir-objects
+ ACLOCAL_AMFLAGS = -I .. -I ../config -I ../bfd
+-SUBDIRS = doc po
+ tooldir = $(exec_prefix)/$(target_alias)
+ 
+ # Automake 1.10+ disables lex and yacc output file regeneration if
+-- 
+2.17.1
+

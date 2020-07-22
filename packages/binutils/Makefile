@@ -6,6 +6,9 @@ tarballs = $(package)-$(version).tar.bz2
 
 include packages/target-package.mk
 
+patches = \
+	disable-docs.patch
+
 conf-args += \
 	--disable-multilib \
 	--disable-nls
