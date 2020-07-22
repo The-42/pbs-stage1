@@ -9,7 +9,8 @@ stages = stage1 stage1-libgcc stage2
 patches = \
 	libsanitizer-fix-struct-sigaction-for-sparc64.patch \
 	Use_ucontext_t_not_struct_ucontext_in_linux-unwind.h_files.patch \
-	0002-libsanitizer-Use-pre-computed-size.patch
+	0002-libsanitizer-Use-pre-computed-size.patch \
+	asan_fix_missing_include_signal.h.patch
 
 include packages/target-package.mk
 

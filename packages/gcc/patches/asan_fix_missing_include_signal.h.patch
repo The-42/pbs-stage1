@@ -1,0 +1,34 @@
+From 205aa8e97bab553e5e6fe45896325e97962de704 Mon Sep 17 00:00:00 2001
+From: Rolf Eike Beer <e...@emlix.com>
+Date: Wed, 8 Feb 2017 11:42:52 +0100
+Subject: [PATCH] asan: fix missing include of signal.h
+
+
+This breaks when building gcc 5.4.0 with 
+target_platform=powerpc-unknown-linux-gnu with glibc 2.25:
+
+../../../../gcc-host/libsanitizer/asan/asan_linux.cc: In function 'bool 
+__asan::AsanInterceptsSignal(int)':
+../../../../gcc-host/libsanitizer/asan/asan_linux.cc:222:20: error: 'SIGSEGV' 
+was not declared in this scope
+   return signum == SIGSEGV && common_flags()->handle_segv;
+
+This applies only to gcc-5-branch, the code has been reworked for gcc 6.
+---
+ libsanitizer/asan/asan_linux.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libsanitizer/asan/asan_linux.cc b/libsanitizer/asan/asan_linux.cc
+index c504168..59087b9 100644
+--- a/libsanitizer/asan/asan_linux.cc
++++ b/libsanitizer/asan/asan_linux.cc
+@@ -29,6 +29,7 @@
+ #include <dlfcn.h>
+ #include <fcntl.h>
+ #include <pthread.h>
++#include <signal.h>
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <unwind.h>
+-- 
+2.8.3
