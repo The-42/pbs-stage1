@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PREFIX=toolchains
+PREFIX={1:=toolchains}
 
 total_failed=0
 total_skipped=0
