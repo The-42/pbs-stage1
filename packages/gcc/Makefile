@@ -19,7 +19,7 @@ stage1-conf-args = \
 	--with-mpfr=$(prefix) \
 	--with-gmp=$(prefix) \
 	--with-ppl=$(prefix) \
-	--enable-languages=c \
+	--enable-languages=c,c++ \
 	--enable-threads=posix \
 	--disable-shared \
 	--disable-nls
