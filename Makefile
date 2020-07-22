@@ -26,31 +26,39 @@ $(prefix)/meta/m4: | $(prefix)/meta
 	$(MAKE) -f packages/m4/Makefile install
 	touch $@
 
-$(prefix)/meta/gmp: | $(prefix)/meta/m4
+m4: $(prefix)/meta/m4
+
+$(prefix)/meta/gmp: m4
 	$(MAKE) -f packages/gmp/Makefile install
 	touch $@
 
-$(prefix)/meta/bison: | $(prefix)/meta
+gmp: $(prefix)/meta/gmp
+
+$(prefix)/meta/bison: m4
 	$(MAKE) -f packages/bison/Makefile install
 	touch $@
 
-$(prefix)/meta/flex: | $(prefix)/meta
+bison: $(prefix)/meta/bison
+
+$(prefix)/meta/flex: m4
 	$(MAKE) -f packages/flex/Makefile install
 	touch $@
+
+flex: $(prefix)/meta/flex
 
 $(prefix)/meta/mpfr: $(prefix)/meta/gmp
 	$(MAKE) -f packages/mpfr/Makefile install
 	touch $@
 
-$(prefix)/meta/ppl: $(prefix)/meta/gmp
-	$(MAKE) -f packages/ppl/Makefile install
-	touch $@
+mpfr: $(prefix)/meta/mpfr
 
 $(prefix)/meta/mpc: $(prefix)/meta/gmp $(prefix)/meta/mpfr
 	$(MAKE) -f packages/mpc/Makefile install
 	touch $@
 
-gcc-libs: $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/bison $(prefix)/meta/flex
+mpc: $(prefix)/meta/mpc
+
+gcc-deps: bison flex gmp mpc mpfr
 
 ifneq ($(target),)
 $(prefix)/meta/$(target)-linux:
@@ -61,7 +69,7 @@ $(prefix)/meta/$(target)-binutils: | $(prefix)/meta
 	$(MAKE) -f packages/binutils/Makefile install
 	touch $@
 
-$(prefix)/meta/$(target)-gcc-stage1: $(prefix)/meta/$(target)-binutils $(prefix)/meta/mpc $(prefix)/meta/ppl $(prefix)/meta/$(target)-linux $(prefix)/meta/bison $(prefix)/meta/flex
+$(prefix)/meta/$(target)-gcc-stage1: gcc-deps $(prefix)/meta/$(target)-binutils $(prefix)/meta/$(target)-linux
 	$(MAKE) -f packages/gcc/Makefile install-stage1
 	touch $@
 
@@ -106,8 +114,14 @@ compiler-test: $(prefix)/meta/test-$(target)-compiler
 
 targets += gcc gdb compiler-test
 else
-targets += gcc-libs
+targets += gcc-deps
 endif
+
+$(prefix)/meta/ppl:
+	$(MAKE) -f packages/ppl/Makefile install
+	touch $@
+
+ppl: $(prefix)/meta/ppl
 
 $(prefix)/meta/libtool:
 	$(MAKE) -f packages/libtool/Makefile install
@@ -151,11 +165,9 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-flex: $(prefix)/meta/flex
+tools: libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
 
-bison: $(prefix)/meta/bison
-
-targets += libtool pkg-config ccache autoconf autoconf-archive automake ncurses flex bison
+targets += tools
 
 all: $(targets)
 
