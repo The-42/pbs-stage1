@@ -13,10 +13,10 @@ cache:
 
 before_install:
   - sudo update-alternatives --set awk /usr/bin/gawk
-  - sudo apt install ccache
+  - ccache --version
   - make --version
   - unset CC
-  - ccache -M 2G && ccache -z
+  - ccache -M 16G && ccache -z
 
 before_script:
   - make
