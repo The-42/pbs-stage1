@@ -7,11 +7,13 @@ compiler:
   - gcc
 
 cache:
+  ccache: true
   directories:
   - $HOME/pbs-stage1/build/download
 
 before_install:
   - sudo update-alternatives --set awk /usr/bin/gawk
+  - sudo apt install ccache
   - |
     wget https://ftp.gnu.org/gnu/make/make-3.82.tar.gz
     tar xf make-3.82.tar.gz && cd make-3.82
@@ -21,6 +23,7 @@ before_install:
     sudo ln -s /usr/local/bin/make /usr/bin
   - make --version
   - unset CC
+  - ccache -M 2G && ccache -z
 
 before_script:
   - make
@@ -28,6 +31,9 @@ before_script:
 script: make -s --no-print-directory TARGET=${pbsarch} 1>build.log
 
 after_script: echo -e "\n\n\n\tPOST-MORTEM stdout\n" && tail -n 2000 build.log
+
+after_success:
+  - ccache -s
 
 env:
   - pbsarch=''
