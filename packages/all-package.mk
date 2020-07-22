@@ -6,4 +6,5 @@ conf-args = \
 	--prefix=$(prefix) \
 	--infodir=$(prefix)/share/info \
 	--mandir=$(prefix)/share/man \
-	--enable-silent-rules
+	--enable-silent-rules \
+	ac_cv_prog_MAKEINFO=
