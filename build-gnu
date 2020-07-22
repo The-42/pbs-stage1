@@ -1,0 +1,40 @@
+#!/bin/sh
+
+PREFIX=$(pwd)/toolchains
+
+BLACKLIST=
+
+if ! test -z "$1"; then
+	PREFIX=`readlink -f "$1"` || exit 1
+fi
+
+if ! test -d "$PREFIX"; then
+	echo "Creating target directory..."
+	mkdir -p "$PREFIX"
+	if ! test -d "$PREFIX"; then
+		echo "Failed to create directory \`$PREFIX'."
+		exit 1
+	fi
+fi
+
+echo "Using target dir \`$PREFIX'"
+FILES=./targets/*gnu*.mk
+
+ionice nice make prefix="$PREFIX" tools
+ionice nice make prefix="$PREFIX" gcc-deps
+
+for f in $FILES
+do
+	target=`basename "$f" .mk`
+	echo "Processing target $target..."
+	case "$target" in $BLACKLIST)
+		echo "-> Skipping blacklisted"
+		continue;
+	esac
+	ionice nice make prefix="$PREFIX" TARGET="$target" gcc
+	ionice nice make prefix="$PREFIX" TARGET="$target" gdb
+	ionice nice make prefix="$PREFIX" TARGET="$target" clean
+done
+
+echo
+echo 'All targets completed.'
