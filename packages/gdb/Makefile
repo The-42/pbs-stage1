@@ -1,11 +1,8 @@
 package = gdb
-version = 7.12.1
+version = 9.2
 
 location = https://ftp.gnu.org/gnu/$(package)
 tarballs = $(package)-$(version).tar.xz
-
-patches = \
-	disable-docs.patch
 
 include packages/target-package.mk
 
