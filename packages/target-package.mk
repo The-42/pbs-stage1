@@ -11,7 +11,8 @@ conf-args = \
 	--with-pkgversion="PBS $(release)" \
 	--with-sysroot=$(sysroot) \
 	--program-prefix=$(target)- \
-	--enable-silent-rules
+	--enable-silent-rules \
+	ac_cv_prog_MAKEINFO=
 
 clean:
 	rm -rf $(wildcard $(pkgbuilddir)*)
