@@ -1,13 +1,10 @@
 package = gcc
-version = 6.3.0
+version = 7.4.0
 
 location = https://ftp.gnu.org/pub/gnu/$(package)/$(package)-$(version)
-tarballs = $(package)-$(version).tar.bz2
+tarballs = $(package)-$(version).tar.xz
 
 stages = stage1 stage1-libgcc stage2
-
-patches = \
-	libsanitizer-fix-struct-sigaction-for-sparc64.patch
 
 include packages/target-package.mk
 
