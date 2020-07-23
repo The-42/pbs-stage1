@@ -1,0 +1,23 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Bert van Hall <bert.vanhall@gmx.de>
+Date: Thu, 23 Jul 2020 13:08:28 +0200
+Subject: [PATCH] disable docs
+
+Signed-off-by: Bert van Hall <bert.vanhall@gmx.de>
+
+diff --git a/gdb/Makefile.in b/gdb/Makefile.in
+index c3e074b..51bfdfb 100644
+--- a/gdb/Makefile.in
++++ b/gdb/Makefile.in
+@@ -1606,7 +1606,7 @@ COMMON_OBS = $(DEPFILES) $(CONFIG_OBS) $(YYOBJ) \
+ 	$(SUBDIR_TARGET_OBS) \
+ 	$(SUBDIR_GCC_COMPILE_OBS)
+ 
+-SUBDIRS = doc @subdirs@ data-directory
++SUBDIRS = @subdirs@ data-directory
+ CLEANDIRS = $(SUBDIRS)
+ 
+ # List of subdirectories in the build tree that must exist.
+-- 
+2.26.2
+
