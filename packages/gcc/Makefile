@@ -6,6 +6,9 @@ tarballs = $(package)-$(version).tar.xz
 
 stages = stage1 stage1-libgcc stage2
 
+patches = \
+	0001-Fix-libsanitizer-builds-with-glibc-2.31.patch
+
 include packages/target-package.mk
 
 stage1-conf-args = \
