@@ -19,11 +19,14 @@ before_install:
   - ccache -M 16G && ccache -z
 
 before_script:
-  - make
+  - maketarget='gcc gdb'; [ -z ${pbsarch} ] && maketarget='tools' || true
+  - testtarget='compiler-test'; [ -z ${pbsarch} ] && testtarget='tools-test' || true
+  - echo "maketarget = $maketarget"
+  - echo "testtarget = $testtarget"
 
-script: make -s --no-print-directory TARGET=${pbsarch} 1>build.log
-
-after_script: echo -e "\n\n\n\tPOST-MORTEM stdout\n" && tail -n 2000 build.log
+script:
+  - make -s --no-print-directory TARGET=${pbsarch} $maketarget
+  - make -s --no-print-directory TARGET=${pbsarch} $testtarget
 
 after_success:
   - ccache -s

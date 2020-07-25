@@ -167,6 +167,8 @@ ncurses: $(prefix)/meta/ncurses
 
 tools: libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
 
+tools-test:
+
 targets += tools
 
 all: $(targets)
