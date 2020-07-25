@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+HERE=$(dirname "$(readlink -f "$0")")
+BASE_URL="https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f="
+
+for cfg in config.guess config.sub; do
+	echo "Updating $cfg..."
+	echo
+	[ -f ${HERE}/$cfg ] && mv $HERE/$cfg $HERE/$cfg.old
+	${HERE}/download ${BASE_URL}$cfg ${HERE}/$cfg || {
+		[ -f ${HERE}/$cfg.old ] && mv ${HERE}/$cfg.old ${HERE}/$cfg
+		exit 1
+	}
+	rm -f ${HERE}/$cfg.old
+	chmod +x ${HERE}/$cfg
+	echo "$cfg version: $(${HERE}/$cfg -t)"
+	echo
+done
