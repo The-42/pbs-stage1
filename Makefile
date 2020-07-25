@@ -58,7 +58,7 @@ $(prefix)/meta/mpc: $(prefix)/meta/gmp $(prefix)/meta/mpfr
 
 mpc: $(prefix)/meta/mpc
 
-gcc-deps: bison flex gmp mpc mpfr
+gcc-deps: host-check bison flex gmp mpc mpfr
 
 ifneq ($(target),)
 $(prefix)/meta/$(target)-linux:
@@ -110,7 +110,7 @@ $(prefix)/meta/test-$(target)-compiler: | $(prefix)/tests
 	$(MAKE) -f tests/Makefile compiler
 	touch $@
 
-compiler-test: $(prefix)/meta/test-$(target)-compiler
+compiler-test: $(prefix)/meta/test-$(target)-compiler | $(prefix)/meta
 
 targets += gcc gdb compiler-test
 else
@@ -165,7 +165,7 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-tools: libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
+tools: host-check libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
 
 tools-test:
 
