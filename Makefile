@@ -183,7 +183,13 @@ $(prefix)/meta/sed:
 
 sed: $(prefix)/meta/sed
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl
+$(prefix)/meta/gawk:
+	$(MAKE) -f packages/gawk/Makefile install
+	touch $@
+
+gawk: $(prefix)/meta/gawk
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk
 
 tools-test:
 
