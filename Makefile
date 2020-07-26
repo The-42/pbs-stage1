@@ -189,7 +189,13 @@ $(prefix)/meta/gawk:
 
 gawk: $(prefix)/meta/gawk
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk
+$(prefix)/meta/readline:
+	$(MAKE) -f packages/readline/Makefile install
+	touch $@
+
+readline: $(prefix)/meta/readline
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk readline
 
 tools-test:
 
