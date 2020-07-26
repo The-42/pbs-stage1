@@ -177,7 +177,13 @@ $(prefix)/meta/bc:
 
 bc: $(prefix)/meta/bc
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
+$(prefix)/meta/sed:
+	$(MAKE) -f packages/sed/Makefile install
+	touch $@
+
+sed: $(prefix)/meta/sed
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl
 
 tools-test:
 
