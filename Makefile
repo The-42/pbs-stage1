@@ -219,7 +219,13 @@ $(prefix)/meta/tar:
 
 tar: $(prefix)/meta/tar
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils
+$(prefix)/meta/make:
+	$(MAKE) -f packages/make/Makefile install
+	touch $@
+
+make: $(prefix)/meta/make
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make
 
 tools-test:
 
