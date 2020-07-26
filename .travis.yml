@@ -9,7 +9,7 @@ compiler:
 cache:
   ccache: true
   directories:
-  - $HOME/pbs-stage1/download
+  - ${TRAVIS_BUILD_DIR}/download
 
 before_install:
   - sudo update-alternatives --set awk /usr/bin/gawk
