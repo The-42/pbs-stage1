@@ -15,7 +15,6 @@ much is needed to get started:
 
 - make >= 3.82
 - gcc, g++ >= 4.8
-- patch
 - wget
 - tar
 - gawk

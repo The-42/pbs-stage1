@@ -22,6 +22,12 @@ targets += host-check
 $(prefix)/meta $(prefix)/tests $(builddir):
 	mkdir -p $@
 
+$(prefix)/meta/patch: | $(prefix)/meta
+	$(MAKE) -f packages/patch/Makefile install
+	touch $@
+
+patch: $(prefix)/meta/patch
+
 $(prefix)/meta/m4: | $(prefix)/meta
 	$(MAKE) -f packages/m4/Makefile install
 	touch $@
@@ -58,7 +64,7 @@ $(prefix)/meta/mpc: $(prefix)/meta/gmp $(prefix)/meta/mpfr
 
 mpc: $(prefix)/meta/mpc
 
-gcc-deps: host-check bison flex gmp mpc mpfr
+gcc-deps: host-check patch bison flex gmp mpc mpfr
 
 ifneq ($(target),)
 $(prefix)/meta/$(target)-linux:
@@ -165,7 +171,7 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-tools: host-check libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
+tools: host-check patch libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
 
 tools-test:
 
