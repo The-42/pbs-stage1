@@ -195,7 +195,13 @@ $(prefix)/meta/readline:
 
 readline: $(prefix)/meta/readline
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk readline
+$(prefix)/meta/findutils:
+	$(MAKE) -f packages/findutils/Makefile install
+	touch $@
+
+findutils: $(prefix)/meta/findutils
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk readline findutils
 
 tools-test:
 
