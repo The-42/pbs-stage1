@@ -207,7 +207,13 @@ $(prefix)/meta/diffutils:
 
 diffutils: $(prefix)/meta/diffutils
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk readline findutils diffutils
+$(prefix)/meta/tar:
+	$(MAKE) -f packages/tar/Makefile install
+	touch $@
+
+tar: $(prefix)/meta/tar
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils
 
 tools-test:
 
