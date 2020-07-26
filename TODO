@@ -1,0 +1,16 @@
+Non-exhaustive unsorted list of stuff left to do:
+
+* distinguish between build tools, host tools and target tools (libs)
+* take the stamp mechanism from stage2
+* support distinct host definition
+* rename this as the latest when compatibility to stage2 breaks
+* support selection from multiple gcc / glibc versions
+* add DejaGnu package for compiler tests
+* support the GCC testsuite from https://github.com/gcc-mirror/gcc/tree/master/gcc/testsuite
+* make target definition more flexible (kconfig?)
+* build qemu to support target tests for native cross builds
+* support install pattern to be able reduce package size
+* support download cache population
+* support download url overrides
+* check dependencies, possible reference: http://www.linuxfromscratch.org/lfs/view/development/appendices/dependencies.html
+
