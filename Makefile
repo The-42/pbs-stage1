@@ -171,7 +171,13 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
-tools: host-check patch libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
+$(prefix)/meta/bc:
+	$(MAKE) -f packages/bc/Makefile install
+	touch $@
+
+bc: $(prefix)/meta/bc
+
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 ppl
 
 tools-test:
 

@@ -1,0 +1,35 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Bert van Hall <bert.vanhall@gmx.de>
+Date: Sun, 26 Jul 2020 17:12:49 +0200
+Subject: [PATCH] disable docs
+
+Signed-off-by: Bert van Hall <bert.vanhall@gmx.de>
+
+diff --git a/Makefile.am b/Makefile.am
+index b6ecd42..4d0b851 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-SUBDIRS = lib bc dc doc
++SUBDIRS = lib bc dc
+ 
+ MAINTAINERCLEANFILES =  aclocal.m4 config.h.in configure Makefile.in \
+ 			stamp-h $(distdir).tar.gz h/number.h depcomp missing \
+diff --git a/Makefile.in b/Makefile.in
+index 7d91281..147f6bd 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -288,7 +288,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = lib bc dc doc
++SUBDIRS = lib bc dc
+ MAINTAINERCLEANFILES = aclocal.m4 config.h.in configure Makefile.in \
+ 			stamp-h $(distdir).tar.gz h/number.h depcomp missing \
+ 			bc/libmath.h
+-- 
+2.17.1
+
