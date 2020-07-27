@@ -171,6 +171,12 @@ $(prefix)/meta/ncurses:
 
 ncurses: $(prefix)/meta/ncurses
 
+$(prefix)/meta/nano:
+	$(MAKE) -f packages/nano/Makefile install
+	touch $@
+
+nano: $(prefix)/meta/nano
+
 $(prefix)/meta/bc:
 	$(MAKE) -f packages/bc/Makefile install
 	touch $@
@@ -225,7 +231,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano
 
 tools-test:
 
