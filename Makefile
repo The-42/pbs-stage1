@@ -111,6 +111,11 @@ $(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
 
 gdb: $(prefix)/meta/$(target)-gdb
 
+$(prefix)/meta/qemu:
+	$(MAKE) -f packages/qemu/Makefile install
+	touch $@
+
+qemu: $(prefix)/meta/qemu
 
 $(prefix)/meta/test-$(target)-compiler: | $(prefix)/tests
 	$(MAKE) -f tests/Makefile compiler
@@ -118,7 +123,7 @@ $(prefix)/meta/test-$(target)-compiler: | $(prefix)/tests
 
 compiler-test: $(prefix)/meta/test-$(target)-compiler | $(prefix)/meta
 
-targets += gcc gdb compiler-test
+targets += gcc gdb qemu compiler-test
 else
 targets += gcc-deps
 endif

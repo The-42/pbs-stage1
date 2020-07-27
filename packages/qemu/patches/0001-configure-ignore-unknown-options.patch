@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Bert van Hall <bert.vanhall@gmx.de>
+Date: Mon, 27 Jul 2020 16:41:21 +0200
+Subject: [PATCH] configure: ignore unknown options
+
+Signed-off-by: Bert van Hall <bert.vanhall@gmx.de>
+
+diff --git a/configure b/configure
+index 23b5e937..2de8867b 100755
+--- a/configure
++++ b/configure
+@@ -1602,9 +1602,8 @@ for opt do
+   --gdb=*) gdb_bin="$optarg"
+   ;;
+   *)
+-      echo "ERROR: unknown option $opt"
++      echo "WARNING: Ignoring unknown option $opt"
+       echo "Try '$0 --help' for more information"
+-      exit 1
+   ;;
+   esac
+ done
+-- 
+2.26.2
+
