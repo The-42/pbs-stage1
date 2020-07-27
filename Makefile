@@ -195,6 +195,12 @@ $(prefix)/meta/libsigsegv:
 
 libsigsegv: $(prefix)/meta/libsigsegv
 
+$(prefix)/meta/gzip:
+	$(MAKE) -f packages/gzip/Makefile install
+	touch $@
+
+gzip: $(prefix)/meta/gzip
+
 $(prefix)/meta/bc:
 	$(MAKE) -f packages/bc/Makefile install
 	touch $@
@@ -249,7 +255,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip
 
 tools-test:
 
