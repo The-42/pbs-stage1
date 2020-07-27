@@ -177,6 +177,12 @@ $(prefix)/meta/nano:
 
 nano: $(prefix)/meta/nano
 
+$(prefix)/meta/which:
+	$(MAKE) -f packages/which/Makefile install
+	touch $@
+
+which: $(prefix)/meta/which
+
 $(prefix)/meta/bc:
 	$(MAKE) -f packages/bc/Makefile install
 	touch $@
@@ -231,7 +237,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which
 
 tools-test:
 
