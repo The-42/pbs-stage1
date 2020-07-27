@@ -183,6 +183,12 @@ $(prefix)/meta/which:
 
 which: $(prefix)/meta/which
 
+$(prefix)/meta/less:
+	$(MAKE) -f packages/less/Makefile install
+	touch $@
+
+less: $(prefix)/meta/less
+
 $(prefix)/meta/bc:
 	$(MAKE) -f packages/bc/Makefile install
 	touch $@
@@ -237,7 +243,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less
 
 tools-test:
 
