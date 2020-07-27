@@ -201,6 +201,12 @@ $(prefix)/meta/gzip:
 
 gzip: $(prefix)/meta/gzip
 
+$(prefix)/meta/grep:
+	$(MAKE) -f packages/grep/Makefile install
+	touch $@
+
+grep: $(prefix)/meta/grep
+
 $(prefix)/meta/bc:
 	$(MAKE) -f packages/bc/Makefile install
 	touch $@
@@ -255,7 +261,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip grep
 
 tools-test:
 
