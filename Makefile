@@ -10,57 +10,59 @@ endif
 export arch cpu os libc abi fp target
 endif
 include defs.mk
+include mk/commands.mk
+include mk/pretty.mk
 
-$(prefix)/meta/_host-check: | $(prefix)/meta
+$(prefix)/meta/_host-check:
 	support/prerequisites.sh
-	touch $@
+	$(call cmd,stamp)
 
 host-check: $(prefix)/meta/_host-check
 
 targets += host-check
 
-$(prefix)/meta $(prefix)/tests $(builddir):
+$(builddir):
 	mkdir -p $@
 
-$(prefix)/meta/patch: | $(prefix)/meta
-	$(MAKE) -f packages/patch/Makefile install
-	touch $@
+$(prefix)/meta/patch:
+	$(Q)$(MAKE) -f packages/patch/Makefile install
+	$(call cmd,stamp)
 
 patch: $(prefix)/meta/patch
 
-$(prefix)/meta/m4: | $(prefix)/meta
-	$(MAKE) -f packages/m4/Makefile install
-	touch $@
+$(prefix)/meta/m4:
+	$(Q)$(MAKE) -f packages/m4/Makefile install
+	$(call cmd,stamp)
 
 m4: $(prefix)/meta/m4
 
 $(prefix)/meta/gmp: m4
-	$(MAKE) -f packages/gmp/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/gmp/Makefile install
+	$(call cmd,stamp)
 
 gmp: $(prefix)/meta/gmp
 
 $(prefix)/meta/bison: m4
-	$(MAKE) -f packages/bison/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/bison/Makefile install
+	$(call cmd,stamp)
 
 bison: $(prefix)/meta/bison
 
 $(prefix)/meta/flex: m4
-	$(MAKE) -f packages/flex/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/flex/Makefile install
+	$(call cmd,stamp)
 
 flex: $(prefix)/meta/flex
 
 $(prefix)/meta/mpfr: $(prefix)/meta/gmp
-	$(MAKE) -f packages/mpfr/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/mpfr/Makefile install
+	$(call cmd,stamp)
 
 mpfr: $(prefix)/meta/mpfr
 
 $(prefix)/meta/mpc: $(prefix)/meta/gmp $(prefix)/meta/mpfr
-	$(MAKE) -f packages/mpc/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/mpc/Makefile install
+	$(call cmd,stamp)
 
 mpc: $(prefix)/meta/mpc
 
@@ -68,60 +70,60 @@ gcc-deps: host-check patch bison flex gmp mpc mpfr
 
 ifneq ($(target),)
 $(prefix)/meta/$(target)-linux:
-	$(MAKE) -f packages/linux/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/linux/Makefile install
+	$(call cmd,stamp)
 
-$(prefix)/meta/$(target)-binutils: | $(prefix)/meta
-	$(MAKE) -f packages/binutils/Makefile install
-	touch $@
+$(prefix)/meta/$(target)-binutils:
+	$(Q)$(MAKE) -f packages/binutils/Makefile install
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-gcc-stage1: gcc-deps $(prefix)/meta/$(target)-binutils $(prefix)/meta/$(target)-linux
-	$(MAKE) -f packages/gcc/Makefile install-stage1
-	touch $@
+	$(Q)$(MAKE) -f packages/gcc/Makefile install-stage1
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-glibc-stage1: $(prefix)/meta/$(target)-gcc-stage1
-	$(MAKE) -f packages/glibc/Makefile install-stage1
-	touch $@
+	$(Q)$(MAKE) -f packages/glibc/Makefile install-stage1
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-uclibc-stage1: $(prefix)/meta/$(target)-gcc-stage1
-	$(MAKE) -f packages/uclibc/Makefile install-stage1
-	touch $@
+	$(Q)$(MAKE) -f packages/uclibc/Makefile install-stage1
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-gcc-stage1-libgcc: $(prefix)/meta/$(target)-$(libc)-stage1
-	$(MAKE) -f packages/gcc/Makefile install-stage1-libgcc
-	touch $@
+	$(Q)$(MAKE) -f packages/gcc/Makefile install-stage1-libgcc
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-glibc: $(prefix)/meta/$(target)-gcc-stage1-libgcc
-	$(MAKE) -f packages/glibc/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/glibc/Makefile install
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-uclibc: $(prefix)/meta/$(target)-gcc-stage1-libgcc
-	$(MAKE) -f packages/uclibc/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/uclibc/Makefile install
+	$(call cmd,stamp)
 
 $(prefix)/meta/$(target)-gcc: $(prefix)/meta/$(target)-$(libc)
-	$(MAKE) -f packages/gcc/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/gcc/Makefile install
+	$(call cmd,stamp)
 
 gcc: $(prefix)/meta/$(target)-gcc
 
 $(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
-	$(MAKE) -f packages/gdb/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/gdb/Makefile install
+	$(call cmd,stamp)
 
 gdb: $(prefix)/meta/$(target)-gdb
 
 $(prefix)/meta/qemu:
-	$(MAKE) -f packages/qemu/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/qemu/Makefile install
+	$(call cmd,stamp)
 
 qemu: $(prefix)/meta/qemu
 
-$(prefix)/meta/test-$(target)-compiler: | $(prefix)/tests
-	$(MAKE) -f tests/Makefile compiler
-	touch $@
+$(prefix)/meta/test-$(target)-compiler:
+	$(Q)$(MAKE) -f tests/Makefile compiler
+	$(call cmd,stamp)
 
-compiler-test: $(prefix)/meta/test-$(target)-compiler | $(prefix)/meta
+compiler-test: $(prefix)/meta/test-$(target)-compiler
 
 targets += gcc gdb qemu compiler-test
 else
@@ -129,140 +131,140 @@ targets += gcc-deps
 endif
 
 $(prefix)/meta/ppl:
-	$(MAKE) -f packages/ppl/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/ppl/Makefile install
+	$(call cmd,stamp)
 
 ppl: $(prefix)/meta/ppl
 
 $(prefix)/meta/libtool:
-	$(MAKE) -f packages/libtool/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/libtool/Makefile install
+	$(call cmd,stamp)
 
 libtool: $(prefix)/meta/libtool
 
 $(prefix)/meta/pkg-config:
-	$(MAKE) -f packages/pkg-config/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/pkg-config/Makefile install
+	$(call cmd,stamp)
 
 pkgconfig pkg-config: $(prefix)/meta/pkg-config
 
 $(prefix)/meta/ccache:
-	$(MAKE) -f packages/ccache/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/ccache/Makefile install
+	$(call cmd,stamp)
 
 ccache: $(prefix)/meta/ccache
 
 $(prefix)/meta/autoconf:
-	$(MAKE) -f packages/autoconf/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/autoconf/Makefile install
+	$(call cmd,stamp)
 
 autoconf: $(prefix)/meta/autoconf
 
 $(prefix)/meta/autoconf-archive:
-	$(MAKE) -f packages/autoconf-archive/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/autoconf-archive/Makefile install
+	$(call cmd,stamp)
 
 autoconf-archive: $(prefix)/meta/autoconf-archive
 
 $(prefix)/meta/automake:
-	$(MAKE) -f packages/automake/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/automake/Makefile install
+	$(call cmd,stamp)
 
 automake: $(prefix)/meta/automake
 
 $(prefix)/meta/ncurses:
-	$(MAKE) -f packages/ncurses/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/ncurses/Makefile install
+	$(call cmd,stamp)
 
 ncurses: $(prefix)/meta/ncurses
 
 $(prefix)/meta/nano:
-	$(MAKE) -f packages/nano/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/nano/Makefile install
+	$(call cmd,stamp)
 
 nano: $(prefix)/meta/nano
 
 $(prefix)/meta/which:
-	$(MAKE) -f packages/which/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/which/Makefile install
+	$(call cmd,stamp)
 
 which: $(prefix)/meta/which
 
 $(prefix)/meta/less:
-	$(MAKE) -f packages/less/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/less/Makefile install
+	$(call cmd,stamp)
 
 less: $(prefix)/meta/less
 
 $(prefix)/meta/libsigsegv:
-	$(MAKE) -f packages/libsigsegv/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/libsigsegv/Makefile install
+	$(call cmd,stamp)
 
 libsigsegv: $(prefix)/meta/libsigsegv
 
 $(prefix)/meta/gzip:
-	$(MAKE) -f packages/gzip/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/gzip/Makefile install
+	$(call cmd,stamp)
 
 gzip: $(prefix)/meta/gzip
 
 $(prefix)/meta/grep:
-	$(MAKE) -f packages/grep/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/grep/Makefile install
+	$(call cmd,stamp)
 
 grep: $(prefix)/meta/grep
 
 $(prefix)/meta/bc:
-	$(MAKE) -f packages/bc/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/bc/Makefile install
+	$(call cmd,stamp)
 
 bc: $(prefix)/meta/bc
 
 $(prefix)/meta/sed:
-	$(MAKE) -f packages/sed/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/sed/Makefile install
+	$(call cmd,stamp)
 
 sed: $(prefix)/meta/sed
 
 $(prefix)/meta/gawk:
-	$(MAKE) -f packages/gawk/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/gawk/Makefile install
+	$(call cmd,stamp)
 
 gawk: $(prefix)/meta/gawk
 
 $(prefix)/meta/readline:
-	$(MAKE) -f packages/readline/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/readline/Makefile install
+	$(call cmd,stamp)
 
 readline: $(prefix)/meta/readline
 
 $(prefix)/meta/findutils:
-	$(MAKE) -f packages/findutils/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/findutils/Makefile install
+	$(call cmd,stamp)
 
 findutils: $(prefix)/meta/findutils
 
 $(prefix)/meta/diffutils:
-	$(MAKE) -f packages/diffutils/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/diffutils/Makefile install
+	$(call cmd,stamp)
 
 diffutils: $(prefix)/meta/diffutils
 
 $(prefix)/meta/coreutils:
-	$(MAKE) -f packages/coreutils/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/coreutils/Makefile install
+	$(call cmd,stamp)
 
 coreutils: $(prefix)/meta/coreutils
 
 $(prefix)/meta/tar:
-	$(MAKE) -f packages/tar/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/tar/Makefile install
+	$(call cmd,stamp)
 
 tar: $(prefix)/meta/tar
 
 $(prefix)/meta/make:
-	$(MAKE) -f packages/make/Makefile install
-	touch $@
+	$(Q)$(MAKE) -f packages/make/Makefile install
+	$(call cmd,stamp)
 
 make: $(prefix)/meta/make
 
@@ -281,10 +283,10 @@ uninstall:
 	rm -rf $(wildcard $(prefix)/meta/$(target)-*)
 
 clean-tests:
-	$(MAKE) -f tests/Makefile clean
+	$(Q)$(MAKE) -f tests/Makefile clean
 	rm -f $(wildcard $(prefix)/meta/test-*)
 
 clean-%:
-	$(MAKE) -f packages/$*/Makefile clean
+	$(Q)$(MAKE) -f packages/$*/Makefile clean
 
 clean: clean-binutils clean-gdb clean-gcc clean-glibc clean-uclibc clean-linux clean-tests

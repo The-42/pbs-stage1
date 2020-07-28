@@ -1,4 +1,5 @@
 include defs.mk
+include mk/commands.mk
 
 #
 # Directories
@@ -34,19 +35,19 @@ $(stampdir): | $(builddir)
 
 $(extract-bz2): $(stampdir)/extract-%: $(downloaddir)/% | $(builddir) $(stampdir)
 	tar xjf $< -C $(builddir)
-	touch $@
+	$(call cmd,stamp)
 
 $(extract-gz): $(stampdir)/extract-%: $(downloaddir)/% | $(builddir) $(stampdir)
 	tar xzf $< -C $(builddir)
-	touch $@
+	$(call cmd,stamp)
 
 $(extract-xz): $(stampdir)/extract-%: $(downloaddir)/% | $(builddir) $(stampdir)
 	tar xJf $< -C $(builddir)
-	touch $@
+	$(call cmd,stamp)
 
 $(apply-patches): $(stampdir)/apply-$(package)-%: $(pkgpatchdir)/% | $(extract-files)
 	cd $(pkgsrcdir) && patch -p1 < $<
-	touch $@
+	$(call cmd,stamp)
 
 $(pkgsrcdir): $(extract-files) $(apply-patches)
 
