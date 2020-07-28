@@ -130,7 +130,7 @@ else
 targets += gcc-deps
 endif
 
-$(prefix)/meta/ppl:
+$(prefix)/meta/ppl: gmp
 	$(Q)$(MAKE) -f packages/ppl/Makefile install
 	$(call cmd,stamp)
 
