@@ -26,6 +26,7 @@ before_script:
 
 script:
   - make -s --no-print-directory TARGET=${pbsarch} $maketarget
+  - [ -z ${pbsarch} ] || make -s --no-print-directory TARGET=${pbsarch} qemu
   - make -s --no-print-directory TARGET=${pbsarch} $testtarget
 
 after_success:
