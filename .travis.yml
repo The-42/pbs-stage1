@@ -25,9 +25,9 @@ before_script:
   - echo "testtarget = $testtarget"
 
 script:
-  - make -s --no-print-directory TARGET=${pbsarch} $maketarget
-  - [ -z ${pbsarch} ] || make -s --no-print-directory TARGET=${pbsarch} qemu
-  - make -s --no-print-directory TARGET=${pbsarch} $testtarget
+  - make TARGET=${pbsarch} $maketarget
+  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu'
+  - make TARGET=${pbsarch} $testtarget
 
 after_success:
   - ccache -s
