@@ -25,12 +25,17 @@ before_script:
   - echo "testtarget = $testtarget"
 
 script:
-  - make TARGET=${pbsarch} $maketarget
-  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu'
-  - make TARGET=${pbsarch} $testtarget
+  - make TARGET=${pbsarch} $maketarget >"${TRAVIS_BUILD_DIR}/build.log"
+  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu' >"${TRAVIS_BUILD_DIR}/build.log"
+  - make TARGET=${pbsarch} $testtarget >"${TRAVIS_BUILD_DIR}/build.log"
 
 after_success:
   - ccache -s
+
+after_failure:
+  - echo "===== End of build.log ====="
+  - tail -n100 "${MAKE_TERMOUT}"
+  - echo "===== ================ ====="
 
 env:
   - pbsarch=''
