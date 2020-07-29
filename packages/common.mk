@@ -15,7 +15,7 @@ pkgpatchdir = $(srcdir)/patches
 download-files = $(addprefix $(downloaddir)/,$(tarballs))
 
 $(downloaddir) $(builddir):
-	mkdir -p $@
+	$(call cmd,mkdir_p)
 
 $(download-files): $(downloaddir)/%: | $(downloaddir)
 	$(CURDIR)/support/download $(location)/$* $@
@@ -31,7 +31,7 @@ apply-patches = $(addprefix $(stampdir)/apply-$(package)-,$(patches))
 stampdir = $(builddir)/stamp
 
 $(stampdir): | $(builddir)
-	mkdir -p $@
+	$(call cmd,mkdir_p)
 
 $(extract-bz2): $(stampdir)/extract-%: $(downloaddir)/% | $(builddir) $(stampdir)
 	tar xjf $< -C $(builddir)
@@ -86,8 +86,10 @@ install-stages = $(addprefix install-,$(or $(stages),all))
 
 stage-args = $(foreach arg,$(1),$(or $($*-$(arg)),$($(arg))))
 
-$(build-stages): build-%: | $(pkgsrcdir)
-	mkdir -p $(pkgoutputdir)
+$(pkgoutputdir):
+	$(call cmd,mkdir_p)
+
+$(build-stages): build-%: | $(pkgsrcdir) $(pkgoutputdir)
 	cd $(conf-cwd) && $(env) $(call stage-args, conf-cmd conf-args conf-goal)
 	cd $(build-cwd) && $(env) $(call stage-args, build-cmd build-args build-goal)
 	cd $(install-cwd) && $(env) $(call stage-args, install-cmd install-args install-goal)

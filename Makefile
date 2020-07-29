@@ -21,9 +21,6 @@ host-check: $(prefix)/meta/_host-check
 
 targets += host-check
 
-$(builddir):
-	mkdir -p $@
-
 $(prefix)/meta/patch:
 	$(Q)$(MAKE) -f packages/patch/Makefile install
 	$(call cmd,stamp)

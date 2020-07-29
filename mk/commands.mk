@@ -5,6 +5,9 @@
 quiet_cmd_stamp = STAMP   $@
       cmd_stamp = mkdir -p $(@D); touch $@
 
+quiet_cmd_mkdir_p = MKDIR   $@
+      cmd_mkdir_p = mkdir -p $@
+
 ##
 ## If quiet is set, print the short version of the command only
 ##
