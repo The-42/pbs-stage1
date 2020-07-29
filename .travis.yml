@@ -26,7 +26,7 @@ before_script:
 
 script:
   - make TARGET=${pbsarch} $maketarget >"${TRAVIS_BUILD_DIR}/build.log"
-  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu' >"${TRAVIS_BUILD_DIR}/build.log"
+  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu >"${TRAVIS_BUILD_DIR}/build.log"'
   - make TARGET=${pbsarch} $testtarget >"${TRAVIS_BUILD_DIR}/build.log"
 
 after_success:
@@ -34,7 +34,7 @@ after_success:
 
 after_failure:
   - echo "===== End of build.log ====="
-  - tail -n100 "${MAKE_TERMOUT}"
+  - tail -n100 "${TRAVIS_BUILD_DIR}/build.log"
   - echo "===== ================ ====="
 
 env:
