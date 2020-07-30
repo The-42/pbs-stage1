@@ -1,6 +1,6 @@
-include packages/common.mk
-
 pkgbuilddir = $(pkgsrcdir)
+
+include packages/common.mk
 
 conf-args = \
 	--prefix=$(prefix) \
