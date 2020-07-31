@@ -11,7 +11,7 @@ include packages/all-package.mk
 
 qarch = $(arch)
 
-ifeq ($(arch),i786)
+ifeq ($(arch),x86)
 	qarch = i386
 else ifeq ($(arch),powerpc)
 	qarch = ppc
