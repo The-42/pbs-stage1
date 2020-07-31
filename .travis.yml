@@ -26,16 +26,19 @@ before_script:
 
 script:
   - make TARGET=${pbsarch} $maketarget >"${TRAVIS_BUILD_DIR}/build.log"
-  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu >"${TRAVIS_BUILD_DIR}/build.log"'
-  - make TARGET=${pbsarch} $testtarget >"${TRAVIS_BUILD_DIR}/build.log"
+  - '[ -z ${pbsarch} ] || make TARGET=${pbsarch} qemu >"${TRAVIS_BUILD_DIR}/build-qemu.log"'
+  - make TARGET=${pbsarch} $testtarget
 
 after_success:
   - ccache -s
 
 after_failure:
-  - echo "===== End of build.log ====="
+  - echo "===== Last 100 lines of build.log ====="
   - tail -n100 "${TRAVIS_BUILD_DIR}/build.log"
-  - echo "===== ================ ====="
+  - echo "===== =========================== ====="
+  - echo "===== Last 100 lines of build-qemu.log ====="
+  - '[ -f "${TRAVIS_BUILD_DIR}/build-qemu.log" ] && tail -n100 "${TRAVIS_BUILD_DIR}/build-qemu.log"'
+  - echo "===== ================================ ====="
 
 env:
   - pbsarch=''
