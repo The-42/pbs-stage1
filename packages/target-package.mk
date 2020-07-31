@@ -1,6 +1,6 @@
-pkgbuilddir = $(pkgsrcdir)/target-$(target)
-
 include packages/common.mk
+
+pkgbuilddir = $(pkgsrcdir)/target-$(target)
 
 conf-args = \
 	--target=$(host) \

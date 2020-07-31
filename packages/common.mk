@@ -86,10 +86,11 @@ install-stages = $(addprefix install-,$(or $(stages),all))
 
 stage-args = $(foreach arg,$(1),$(or $($*-$(arg)),$($(arg))))
 
-$(pkgoutputdir):
+.SECONDEXPANSION:
+$(pkgoutputdir)%:
 	$(call cmd,mkdir_p)
 
-$(build-stages): build-%: | $(pkgsrcdir) $(pkgoutputdir)
+$(build-stages): build-%: | $(pkgsrcdir) $$(pkgoutputdir)
 	cd $(conf-cwd) && $(env) $(call stage-args, conf-cmd conf-args conf-goal)
 	cd $(build-cwd) && $(env) $(call stage-args, build-cmd build-args build-goal)
 	cd $(install-cwd) && $(env) $(call stage-args, install-cmd install-args install-goal)
