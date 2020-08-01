@@ -110,11 +110,11 @@ $(prefix)/meta/$(target)-gdb: $(prefix)/meta/ncurses
 
 gdb: $(prefix)/meta/$(target)-gdb
 
-$(prefix)/meta/qemu:
+$(prefix)/meta/$(target)-qemu:
 	$(Q)$(MAKE) -f packages/qemu/Makefile install
 	$(call cmd,stamp)
 
-qemu: $(prefix)/meta/qemu
+qemu: $(prefix)/meta/$(target)-qemu
 
 $(prefix)/meta/test-$(target)-compiler:
 	$(Q)$(MAKE) -f tests/Makefile compiler
