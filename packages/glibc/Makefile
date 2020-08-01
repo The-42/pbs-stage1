@@ -60,17 +60,3 @@ ifeq ($(arch),sparc64)
 stage2-conf-args += \
 	CFLAGS='-O2 -g -mcpu=ultrasparc'
 endif
-
-#
-# On IA64, the programs built by glibc cannot be properly linked because
-# they reference symbols defined only by the shared libunwind that is
-# only built by stage2 of gcc. We work around this by instructing the
-# build system to not build the problematic programs.
-#
-ifeq ($(arch),ia64)
-build-stage2: $(pkgbuilddir)/stage2/configparms
-
-$(pkgbuilddir)/stage2/configparms:
-	mkdir -p $(pkgbuilddir)/stage2
-	echo "build-programs = no" > $@
-endif
