@@ -5,7 +5,17 @@ testdir=$(prefix)/tests
 gcc=$(target)-gcc
 gxx=$(target)-g++
 objdump=$(target)-objdump
-qemu=qemu-$(firstword $(subst -, ,$(target)))
+
+ifeq ($(arch),x86)
+	qarch = i386
+else ifeq ($(arch),powerpc)
+	qarch = ppc
+else ifeq ($(arch),s390)
+	qarch = s390x
+else
+	qarch = $(arch)
+endif
+qemu=qemu-$(qarch)
 
 $(testdir):
 	$(call cmd,mkdir_p)
