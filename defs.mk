@@ -1,4 +1,6 @@
-release = 2017.06.1
+name = PBS
+release = $(shell git describe 2>/dev/null || echo "$(date -I)-custom")
+package-version = $(name) $(release)
 
 downloaddir = download
 top_builddir = $(prefix)/build

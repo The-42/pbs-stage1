@@ -8,7 +8,7 @@ conf-args = \
 	--datadir=$(exec-prefix)/share \
 	--infodir=$(exec-prefix)/share/info \
 	--mandir=$(exec-prefix)/share/man \
-	--with-pkgversion="PBS $(release)" \
+	--with-pkgversion="$(package-version)" \
 	--with-sysroot=$(sysroot) \
 	--program-prefix=$(target)- \
 	--enable-silent-rules \
