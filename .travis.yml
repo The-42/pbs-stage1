@@ -49,6 +49,7 @@ env:
   - pbsarch=arm-unknown-linux-uclibceabi
   - pbsarch=armv7l-unknown-linux-gnueabihf
   - pbsarch=armv7l-unknown-linux-uclibceabihf
+  - pbsarch=armv8a-unknown-linux-gnueabihf
   - pbsarch=i786-pc-linux-gnu
   - pbsarch=i786-pc-linux-uclibc
   - pbsarch=m68k-linux-gnu
