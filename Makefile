@@ -13,6 +13,9 @@ include defs.mk
 include mk/commands.mk
 include mk/pretty.mk
 
+version:
+	@echo $(package-version)
+
 $(prefix)/meta/_host-check:
 	support/prerequisites.sh
 	$(call cmd,stamp)
