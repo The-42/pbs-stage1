@@ -10,11 +10,18 @@ srcdir = $(CURDIR)/packages/$(package)
 pkgpatchdir = $(srcdir)/patches
 
 #
+# Package build directory
+#
+$(builddir):
+	@echo "  =====   Building package $(package)"
+	$(call cmd,mkdir_p)
+
+#
 # Package dowload, extract and patch
 #
 download-files = $(addprefix $(downloaddir)/,$(tarballs))
 
-$(downloaddir) $(builddir):
+$(downloaddir):
 	$(call cmd,mkdir_p)
 
 $(download-files): $(downloaddir)/%: | $(downloaddir)
@@ -98,5 +105,6 @@ $(build-stages): build-%: | $(pkgsrcdir) $$(pkgoutputdir)
 $(install-stages): install-%: build-%
 
 install: $(lastword $(install-stages))
+	@echo "  =====   Completed package $(package)"
 
 .PHONY: install $(build-stages)
