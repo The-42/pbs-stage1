@@ -42,14 +42,14 @@ features-dynamic: | $(testdir)
 	@echo "Static binary test..."
 	$(env) $(gxx) -std=c++17 -o $(testdir)/$(target)-features $(features-src) -lstdc++
 	@echo "Build completed."
-	#$(env) $(qemu) -L $(prefix)/$(target)/sys-root $(testdir)/$(target)-features
+	#$(env) $(qemu) -L $(sysroot) $(testdir)/$(target)-features
 	#@echo "Test completed."
 
 features-static: | $(testdir)
 	@echo "Static binary test..."
 	$(env) $(gxx) -static -std=c++17 -o $(testdir)/$(target)-features-static $(features-src) -lstdc++
 	@echo "Build completed."
-	$(env) $(qemu) -L $(prefix)/$(target)/sys-root $(testdir)/$(target)-features-static
+	$(env) $(qemu) -L $(sysroot) $(testdir)/$(target)-features-static
 	@echo "Test completed."
 
 compiler: compiler-dynamic compiler-static features-dynamic features-static
