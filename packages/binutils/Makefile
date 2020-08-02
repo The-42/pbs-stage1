@@ -10,5 +10,6 @@ patches = \
 include packages/target-package.mk
 
 conf-args += \
+	--enable-gold \
 	--disable-multilib \
 	--disable-nls
