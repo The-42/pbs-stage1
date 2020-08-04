@@ -14,6 +14,11 @@ endif
 
 ifeq ($(arch),powerpc)
   defconfig = ppc64_defconfig
+else ifeq ($(arch),mips64)
+  arch = mips
+  defconfig = 64r2$(variant)_defconfig
+else ifeq ($(arch),mips)
+  defconfig = 32r2$(variant)_defconfig
 else
   defconfig = defconfig
 endif
