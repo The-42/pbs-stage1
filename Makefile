@@ -7,7 +7,7 @@ ifeq ($(libc),gnu)
   libc = glibc
 endif
 
-export arch cpu os libc abi fp target
+export arch cpu variant os libc abi fp target
 endif
 include defs.mk
 include mk/commands.mk

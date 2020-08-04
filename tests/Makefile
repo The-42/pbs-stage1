@@ -8,6 +8,8 @@ objdump=$(target)-objdump
 
 ifeq ($(arch),x86)
 	qarch = i386
+else ifeq ($(arch),mips)
+	qarch = $(arch)$(variant)
 else ifeq ($(arch),powerpc)
 	qarch = ppc
 else ifeq ($(arch),s390)

@@ -1,5 +1,6 @@
 arch = mips
+variant = el
 os = linux
 libc = gnu
 
-target := $(arch)el-$(os)-$(libc)
+target := $(arch)$(variant)-$(os)-$(libc)
