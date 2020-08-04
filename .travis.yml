@@ -53,6 +53,7 @@ env:
   - pbsarch=i786-pc-linux-gnu
   - pbsarch=i786-pc-linux-uclibc
   - pbsarch=m68k-linux-gnu
+  - pbsarch=mips64el-linux-gnu
   - pbsarch=mipsel-linux-gnu
   - pbsarch=mips-linux-gnu
   - pbsarch=powerpc-unknown-linux-gnu
