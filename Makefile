@@ -190,6 +190,12 @@ $(prefix)/meta/which:
 
 which: $(prefix)/meta/which
 
+$(prefix)/meta/quilt:
+	$(Q)$(MAKE) -f packages/quilt/Makefile install
+	$(call cmd,stamp)
+
+quilt: $(prefix)/meta/quilt
+
 $(prefix)/meta/less:
 	$(Q)$(MAKE) -f packages/less/Makefile install
 	$(call cmd,stamp)
