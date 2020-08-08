@@ -148,6 +148,12 @@ $(prefix)/meta/pkg-config:
 
 pkgconfig pkg-config: $(prefix)/meta/pkg-config
 
+$(prefix)/meta/kconfig-frontends:
+	$(Q)$(MAKE) -f packages/kconfig-frontends/Makefile install
+	$(call cmd,stamp)
+
+kconfig-frontends: $(prefix)/meta/kconfig-frontends
+
 $(prefix)/meta/ccache:
 	$(Q)$(MAKE) -f packages/ccache/Makefile install
 	$(call cmd,stamp)
@@ -280,7 +286,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip grep quilt gperf
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip grep quilt gperf kconfig-frontends
 
 tools-test:
 
