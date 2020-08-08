@@ -220,6 +220,12 @@ $(prefix)/meta/grep:
 
 grep: $(prefix)/meta/grep
 
+$(prefix)/meta/gperf:
+	$(Q)$(MAKE) -f packages/gperf/Makefile install
+	$(call cmd,stamp)
+
+gperf: $(prefix)/meta/gperf
+
 $(prefix)/meta/bc:
 	$(Q)$(MAKE) -f packages/bc/Makefile install
 	$(call cmd,stamp)
@@ -274,7 +280,7 @@ $(prefix)/meta/make:
 
 make: $(prefix)/meta/make
 
-tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip grep
+tools: host-check patch bc libtool pkg-config ccache autoconf autoconf-archive automake ncurses m4 sed ppl gawk tar readline findutils diffutils coreutils make nano which less libsigsegv gzip grep quilt gperf
 
 tools-test:
 
