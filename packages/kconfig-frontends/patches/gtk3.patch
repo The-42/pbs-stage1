@@ -1,0 +1,15 @@
+Description: Support for GTK3
+ GTK2 is deprecated. Local implementation should seamlessly
+ support GTK3 in replacement of GTK2.
+Author: Philippe Thierry <phil@reseau-libre.net>
+--- a/configure.ac
++++ b/configure.ac
+@@ -385,7 +385,7 @@
+     [test "$need_gtk" = "yes" -o "$need_gtk" = "auto"],
+     [PKG_CHECK_MODULES(
+         [gtk],
+-        [gtk+-2.0 gmodule-2.0 libglade-2.0],
++        [gtk+-3.0 gmodule-2.0 libglade-2.0],
+         [has_gtk=yes],
+         [AS_IF(
+             [test "$need_gtk" = "yes"],
