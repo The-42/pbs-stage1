@@ -14,6 +14,8 @@ include mk/commands.mk
 include mk/pretty.mk
 include mk/print-vars.mk
 
+MAKEFLAGS= -rR --no-print-directory
+
 version:
 	@echo $(package-version)
 
