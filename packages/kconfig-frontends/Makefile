@@ -6,7 +6,6 @@ tarballs = $(package)_$(version)+dfsg.orig.tar.bz2
 
 patches = \
 	gperf_newtype.patch \
-	gtk3.patch \
 	python3_support.patch
 
 include packages/all-package.mk
