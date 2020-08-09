@@ -11,7 +11,7 @@ patches = \
 include packages/all-package.mk
 
 $(pkgbuilddir)/configure:
-	cd $(@D) && autoreconf -i -f -v
+	cd $(@D) && mkdir -p scripts/.autostuff/m4 && $(env) autoreconf -i -f
 
 build-all: $(pkgbuilddir)/configure
 
