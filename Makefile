@@ -12,6 +12,7 @@ endif
 include defs.mk
 include mk/commands.mk
 include mk/pretty.mk
+include mk/print-vars.mk
 
 version:
 	@echo $(package-version)
