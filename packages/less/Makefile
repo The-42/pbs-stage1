@@ -1,7 +1,7 @@
 package = less
-version = 530
+version = 551
 
-location = https://ftp.gnu.org/pub/gnu/$(package)
+location = http://www.greenwoodsoftware.com/$(package)
 tarballs = $(package)-$(version).tar.gz
 
 include packages/all-package.mk
